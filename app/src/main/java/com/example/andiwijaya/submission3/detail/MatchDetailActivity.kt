@@ -24,6 +24,7 @@ import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
 import java.text.SimpleDateFormat
 
@@ -221,16 +222,19 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                 true
             }
             R.id.add_to_favorite -> {
-                if (isFavorite) removeFromFavorite() else addToFavorite()
-
-                isFavorite = !isFavorite
-                setFavorite()
-
+                checkFavoriteStat()
                 true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun checkFavoriteStat() {
+        if (isFavorite) removeFromFavorite() else addToFavorite()
+
+        isFavorite = !isFavorite
+        setFavorite()
     }
 
     private fun addToFavorite(){
@@ -246,7 +250,10 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     Favorite.HOME_SCORE to match.homeScore,
                     Favorite.AWAY_SCORE to match.awayScore)
             }
-            Toast.makeText(applicationContext, "Berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+            snackbar(detailRL, "Ditambahkan ke favorite", "undo") {
+                checkFavoriteStat()
+                removeFromFavorite()
+            }
         } catch (e: SQLiteConstraintException){
             Log.d("e", e.toString())
         }
@@ -258,7 +265,10 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                 delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})",
                     "id" to id)
             }
-            Toast.makeText(applicationContext, "Berhasil dihapus", Toast.LENGTH_SHORT).show()
+            snackbar(detailRL, "Dihapus dari favorite", "undo") {
+                checkFavoriteStat()
+                addToFavorite()
+            }
         } catch (e: SQLiteConstraintException){
         }
     }
