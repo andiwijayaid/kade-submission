@@ -35,7 +35,7 @@ class LastMatchFragment : Fragment(), MatchesView {
     }
 
     override fun showListMatch(data: List<Match>) {
-        swipeRefreshLayout.isRefreshing = false
+        swipeRefreshLayout?.isRefreshing = false
         matches.clear()
         matches.addAll(data)
         adapter.notifyDataSetChanged()
@@ -44,7 +44,7 @@ class LastMatchFragment : Fragment(), MatchesView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.last_match_layout, container, false)
 
-        view.swipeRefreshLayout.setColorSchemeResources(colorAccent,
+        view.swipeRefreshLayout?.setColorSchemeResources(colorAccent,
             android.R.color.holo_green_light,
             android.R.color.holo_orange_light,
             android.R.color.holo_red_light
@@ -59,7 +59,7 @@ class LastMatchFragment : Fragment(), MatchesView {
         val presenter = MatchesPresenter(this@LastMatchFragment, request, gson)
         presenter.getPastMatchList("4328")
 
-        view.swipeRefreshLayout.onRefresh {
+        view.swipeRefreshLayout?.onRefresh {
             presenter.getPastMatchList("4328")
         }
 

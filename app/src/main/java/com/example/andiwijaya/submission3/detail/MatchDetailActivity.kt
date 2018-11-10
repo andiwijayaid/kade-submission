@@ -21,6 +21,7 @@ import org.jetbrains.anko.db.select
 import com.example.andiwijaya.submission3.model.Favorite
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.gone
+import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_match_detail.*
@@ -58,6 +59,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         presenter.getMatchDetail(fileName)
 
         swipeRefreshLayout.onRefresh {
+            noDataTV.invisible()
             presenter.getMatchDetail(fileName)
         }
     }
@@ -106,6 +108,11 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             data[0].awayLineupSubstitutes,
             data[0].fileName,
             data[0].matchId)
+
+        if (data[0].homeGoalDetails == null) {
+            noDataTV.visible()
+            detailSV.invisible()
+        }
 
         swipeRefreshLayout.isRefreshing = false
 
