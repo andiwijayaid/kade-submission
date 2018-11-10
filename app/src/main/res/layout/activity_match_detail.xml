@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white"
+        tools:context=".detail.MatchDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:title="@string/match_detail"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:titleTextColor="#fff"/>
+
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+    <LinearLayout
+            android:id="@+id/detailLL"
+            android:layout_below="@id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/dateTV"
+                android:text="@string/dates"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:baselineAligned="false">
+
+            <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:id="@+id/homeBadgeIV"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/this_is_image"/>
+
+                <TextView
+                        android:id="@+id/homeNameTV"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/homeScoreTV"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="32sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginEnd="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:text="@string/vs"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorAccent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/awayScoreTV"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="32sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginStart="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:id="@+id/awayBadgeIV"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/this_is_image"/>
+
+                <TextView
+                        android:id="@+id/awayNameTV"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/black"
+                android:layout_height="0.5dp"/>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:text="@string/goals"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:layout_width="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"/>
+
+                    <LinearLayout
+                            android:id="@+id/goalLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/homeGoalDetailTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                                android:id="@+id/awayGoalDetailTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/shotLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp">
+
+                        <TextView
+                                android:id="@+id/homeShotTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"/>
+
+                        <TextView
+                                android:text="@string/shots"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorAccent"
+                                android:layout_width="wrap_content"
+                                android:textStyle="bold"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:id="@+id/awayShotTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:textSize="16sp"/>
+
+                    </LinearLayout>
+
+                    <View
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_width="match_parent"
+                            android:background="@android:color/black"
+                            android:layout_height="0.5dp"/>
+
+                    <TextView
+                            android:text="@string/lineups"
+                            android:layout_gravity="center"
+                            android:textColor="@android:color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"/>
+
+                    <TextView
+                            android:text="@string/goal_keeper"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_margin="8dp"/>
+
+                    <LinearLayout
+                            android:id="@+id/goalKeeperLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/homeGKTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                                android:id="@+id/awayGKTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                            android:text="@string/defense"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_margin="8dp"/>
+
+                    <LinearLayout
+                            android:id="@+id/defenseLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/homeDefenseTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                                android:id="@+id/awayDefenseTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                            android:text="@string/midfield"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_margin="8dp"/>
+
+                    <LinearLayout
+                            android:id="@+id/midfieldLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/homeMidfieldTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                                android:id="@+id/awayMidfieldTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                            android:text="@string/forward"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_margin="8dp"/>
+
+                    <LinearLayout
+                            android:id="@+id/forwardLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/homeForwardTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                                android:id="@+id/awayForwardTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                            android:text="@string/subtitutions"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorAccent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_margin="8dp"/>
+
+                    <LinearLayout
+                            android:id="@+id/subtitutionsLL"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/homeSubsTV"
+                                android:textAlignment="textStart"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                                android:id="@+id/awaySubsTV"
+                                android:textAlignment="textEnd"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

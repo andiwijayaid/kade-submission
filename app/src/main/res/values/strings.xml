@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ENGLISH PREMIER</string>
+    <string name="favorites">Favorites</string>
+    <string name="english_premiere_league">ENGLISH PREMIERE LEAGUE</string>
+    <string name="my_favorite">MY FAVORITE</string>
+    <string name="match_fixture">Match Fixture</string>
+    <string name="this_is_image">this is image</string>
+    <string name="tanggal">tanggal</string>
+    <string name="home">home</string>
+    <string name="_0">0</string>
+    <string name="vs">vs</string>
+    <string name="away">away</string>
+    <string name="match_detail">MATCH DETAIL</string>
+    <string name="dates">Dates</string>
+    <string name="goals">Goals</string>
+    <string name="shots">Shots</string>
+    <string name="lineups">Lineups</string>
+    <string name="goal_keeper">Goal Keeper</string>
+    <string name="defense">Defense</string>
+    <string name="midfield">Midfield</string>
+    <string name="forward">Forward</string>
+    <string name="subtitutions">Subtitutions</string>
+</resources>
