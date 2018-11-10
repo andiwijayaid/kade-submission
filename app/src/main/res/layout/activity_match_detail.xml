@@ -27,7 +27,7 @@
             android:id="@+id/noDataTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Match has not been started"
+            android:text="@string/match_has_not_started_yet"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_centerInParent="true"
