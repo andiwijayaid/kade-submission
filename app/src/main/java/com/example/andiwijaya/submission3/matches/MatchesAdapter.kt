@@ -11,9 +11,10 @@ import android.widget.TextView
 import com.example.andiwijaya.submission3.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Match
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 
-class MainAdapter(private val matches: MutableList<Match>, private val context: Context) :
+class MainAdapter(private val matches: MutableList<Match>, private val listener: (Match) -> Unit) :
     RecyclerView.Adapter<MatchViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MatchViewHolder {
@@ -30,12 +31,7 @@ class MainAdapter(private val matches: MutableList<Match>, private val context: 
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(p0: MatchViewHolder, p1: Int) {
-        p0.bindItem(matches[p1])
-
-        p0.matchLL.setOnClickListener {
-            context.startActivity<MatchDetailActivity>("FILE_NAME" to matches[p1].fileName,
-                                                        "ID" to matches[p1].matchId)
-        }
+        p0.bindItem(matches[p1], listener)
     }
 
 }
@@ -48,11 +44,13 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tanggalTV: TextView = view.findViewById(R.id.tanggalTV)
     val matchLL: LinearLayout = view.findViewById(R.id.matchLL)
 
-    fun bindItem(matches: Match) {
+    fun bindItem(matches: Match, listener: (Match) -> Unit) {
         homeNameTV.text = matches.homeTeam
         awayNameTV.text = matches.awayTeam
         homeScoreTV.text = matches.homeScore
         awayScoreTV.text = matches.awayScore
         tanggalTV.text = matches.date
+
+        matchLL.onClick { listener(matches) }
     }
 }

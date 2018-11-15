@@ -2,22 +2,17 @@ package com.example.andiwijaya.submission3.detail
 
 import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteConstraintException
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.drawable.ic_add_to_favorites
 import com.example.andiwijaya.submission3.R.drawable.ic_added_to_favorites
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.db.database
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.db.select
 import com.example.andiwijaya.submission3.model.Favorite
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.gone
@@ -25,6 +20,10 @@ import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
 import java.text.SimpleDateFormat
@@ -131,32 +130,32 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         data[0].homeLineupSubstitutes = match.homeLineupSubstitutes?.replace(";", "\n")
         data[0].awayLineupSubstitutes = match.awayLineupSubstitutes?.replace(";", "\n")
 
-        homeNameTV.setText(data[0].homeTeam)
-        awayNameTV.setText(data[0].awayTeam)
+        homeNameTV.text = data[0].homeTeam
+        awayNameTV.text = data[0].awayTeam
 
-        homeScoreTV.setText(data[0].homeScore)
-        awayScoreTV.setText(data[0].awayScore)
+        homeScoreTV.text = data[0].homeScore
+        awayScoreTV.text = data[0].awayScore
 
-        homeGoalDetailTV.setText(data[0].homeGoalDetails)
-        awayGoalDetailTV.setText(data[0].awayGoalDetails)
+        homeGoalDetailTV.text = data[0].homeGoalDetails
+        awayGoalDetailTV.text = data[0].awayGoalDetails
 
-        homeShotTV.setText(data[0].homeShots)
-        awayShotTV.setText(data[0].awayShots)
+        homeShotTV.text = data[0].homeShots
+        awayShotTV.text = data[0].awayShots
 
-        homeGKTV.setText(data[0].homeLineupGoalkeeper)
-        awayGKTV.setText(data[0].awayLineupGoalkeeper)
+        homeGKTV.text = data[0].homeLineupGoalkeeper
+        awayGKTV.text = data[0].awayLineupGoalkeeper
 
-        homeDefenseTV.setText(data[0].homeLineupDefense)
-        awayDefenseTV.setText(data[0].awayLineupDefense)
+        homeDefenseTV.text = data[0].homeLineupDefense
+        awayDefenseTV.text = data[0].awayLineupDefense
 
-        homeMidfieldTV.setText(data[0].homeLineupMidfield)
-        awayMidfieldTV.setText(data[0].awayLineupMidfield)
+        homeMidfieldTV.text = data[0].homeLineupMidfield
+        awayMidfieldTV.text = data[0].awayLineupMidfield
 
-        homeForwardTV.setText(data[0].homeLineupForward)
-        awayForwardTV.setText(data[0].awayLineupForward)
+        homeForwardTV.text = data[0].homeLineupForward
+        awayForwardTV.text = data[0].awayLineupForward
 
-        homeSubsTV.setText(data[0].homeLineupSubstitutes)
-        awaySubsTV.setText(data[0].awayLineupSubstitutes)
+        homeSubsTV.text = data[0].homeLineupSubstitutes
+        awaySubsTV.text = data[0].awayLineupSubstitutes
 
         val df = SimpleDateFormat("dd/MM/yyyy")
         val result = df.parse(data[0].date)
@@ -166,7 +165,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val newDateFormat = SimpleDateFormat("dd MMM yy")
         val newDate = newDateFormat.format(result)
 
-        dateTV.setText("$namaHari, $newDate")
+        dateTV.text = "$namaHari, $newDate"
 
         when(data[0].homeTeam) {
             "Arsenal" -> homeBadgeIV.setImageResource(R.drawable.arsenal)

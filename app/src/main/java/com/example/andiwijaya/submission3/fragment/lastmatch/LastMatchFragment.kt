@@ -14,10 +14,12 @@ import com.example.andiwijaya.submission3.model.Match
 import kotlinx.android.synthetic.main.last_match_layout.*
 import com.example.andiwijaya.submission3.R.color.colorAccent
 import com.example.andiwijaya.submission3.api.ApiRepository
+import com.example.andiwijaya.submission3.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.last_match_layout.view.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
@@ -50,9 +52,12 @@ class LastMatchFragment : Fragment(), MatchesView {
             android.R.color.holo_red_light
         )
 
-        adapter = MainAdapter(matches, ctx)
-        view.lastMatchRV.layoutManager = LinearLayoutManager(ctx)
+        adapter = MainAdapter(matches) {
+            activity?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
+                "ID" to "${it.matchId}")
+        }
         view.lastMatchRV.adapter = adapter
+        view.lastMatchRV.layoutManager = LinearLayoutManager(ctx)
         val request = ApiRepository()
         val gson = Gson()
 

@@ -16,8 +16,10 @@ import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import com.example.andiwijaya.submission3.R.color.colorAccent
+import com.example.andiwijaya.submission3.detail.MatchDetailActivity
 import kotlinx.android.synthetic.main.next_match_layout.*
 import kotlinx.android.synthetic.main.next_match_layout.view.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
@@ -51,7 +53,10 @@ class NextMatchFragment : Fragment(), MatchesView {
             android.R.color.holo_red_light
         )
 
-        adapter = MainAdapter(matches, ctx)
+        adapter = MainAdapter(matches) {
+            activity?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
+                "ID" to "${it.matchId}")
+        }
         view.nextMatchRV.layoutManager = LinearLayoutManager(ctx)
         view.nextMatchRV.adapter = adapter
         val request = ApiRepository()
