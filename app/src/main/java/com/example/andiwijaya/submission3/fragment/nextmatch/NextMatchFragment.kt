@@ -20,7 +20,6 @@ import com.example.andiwijaya.submission3.detail.MatchDetailActivity
 import kotlinx.android.synthetic.main.next_match_layout.*
 import kotlinx.android.synthetic.main.next_match_layout.view.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
 class NextMatchFragment : Fragment(), MatchesView {
@@ -57,7 +56,7 @@ class NextMatchFragment : Fragment(), MatchesView {
             activity?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
                 "ID" to "${it.matchId}")
         }
-        view.nextMatchRV.layoutManager = LinearLayoutManager(ctx)
+        view.nextMatchRV.layoutManager = LinearLayoutManager(context)
         view.nextMatchRV.adapter = adapter
         val request = ApiRepository()
         val gson = Gson()

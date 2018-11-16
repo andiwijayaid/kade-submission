@@ -13,7 +13,6 @@ import com.example.andiwijaya.submission3.db.database
 import kotlinx.android.synthetic.main.last_match_layout.view.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
 class FavoriteMatchesFragment : Fragment() {
@@ -26,8 +25,8 @@ class FavoriteMatchesFragment : Fragment() {
         val view = inflater.inflate(R.layout.favorite_match_layout, container, false)
 
         swipeRefresh = view.findViewById(R.id.swipeRefreshLayout)
-        adapter = FavoriteMatchesAdapter(favorites, ctx)
-        view.lastMatchRV.layoutManager = LinearLayoutManager(ctx)
+        adapter = FavoriteMatchesAdapter(favorites, view.context)
+        view.lastMatchRV.layoutManager = LinearLayoutManager(context)
         view.lastMatchRV.adapter = adapter
         showFavorite()
 

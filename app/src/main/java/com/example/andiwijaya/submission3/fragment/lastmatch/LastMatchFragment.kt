@@ -20,7 +20,6 @@ import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.last_match_layout.view.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
 class LastMatchFragment : Fragment(), MatchesView {
@@ -57,7 +56,7 @@ class LastMatchFragment : Fragment(), MatchesView {
                 "ID" to "${it.matchId}")
         }
         view.lastMatchRV.adapter = adapter
-        view.lastMatchRV.layoutManager = LinearLayoutManager(ctx)
+        view.lastMatchRV.layoutManager = LinearLayoutManager(context)
         val request = ApiRepository()
         val gson = Gson()
 

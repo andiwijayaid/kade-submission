@@ -1,18 +1,15 @@
 package com.example.andiwijaya.submission3.matches
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.andiwijaya.submission3.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Match
-import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MainAdapter(private val matches: MutableList<Match>, private val listener: (Match) -> Unit) :
     RecyclerView.Adapter<MatchViewHolder>() {

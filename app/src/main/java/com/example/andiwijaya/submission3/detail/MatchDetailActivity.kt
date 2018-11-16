@@ -256,7 +256,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     Favorite.HOME_SCORE to match.homeScore,
                     Favorite.AWAY_SCORE to match.awayScore)
             }
-            snackbar(detailRL, "Ditambahkan ke favorite", "undo") {
+            detailRL.snackbar("Ditambahkan ke favorite", "undo") {
                 checkFavoriteStat()
                 removeFromFavorite()
             }
@@ -271,7 +271,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                 delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})",
                     "id" to id)
             }
-            snackbar(detailRL, "Dihapus dari favorite", "undo") {
+            detailRL.snackbar("Dihapus dari favorite", "undo") {
                 checkFavoriteStat()
                 addToFavorite()
             }

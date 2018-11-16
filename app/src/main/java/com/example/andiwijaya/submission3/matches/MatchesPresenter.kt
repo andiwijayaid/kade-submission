@@ -4,6 +4,9 @@ import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.api.TheSportDBApi
 import com.example.andiwijaya.submission3.model.MatchResponse
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -16,32 +19,26 @@ class MatchesPresenter(
     fun getPastMatchList(id: String) {
         view.showLoading()
 
-        doAsync {
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getLastMatch(id)),
-                MatchResponse::class.java
-            )
+                .doRequest(TheSportDBApi.getLastMatch(id)).await(),
+                MatchResponse::class.java)
 
-            uiThread {
-                view.hideLoading()
-                view.showListMatch(data.events)
-            }
+            view.showListMatch(data.events)
+            view.hideLoading()
         }
     }
 
     fun getNextMatchList(id: String) {
         view.showLoading()
 
-        doAsync {
+        GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getNextMatch(id)),
-                MatchResponse::class.java
-            )
+                .doRequest(TheSportDBApi.getNextMatch(id)).await(),
+                MatchResponse::class.java)
 
-            uiThread {
-                view.hideLoading()
-                view.showListMatch(data.events)
-            }
+            view.showListMatch(data.events)
+            view.hideLoading()
         }
     }
 
