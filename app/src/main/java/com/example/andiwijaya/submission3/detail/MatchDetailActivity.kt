@@ -237,7 +237,10 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     private fun checkFavoriteStat() {
-        if (isFavorite) removeFromFavorite() else addToFavorite()
+        if (isFavorite)
+            removeFromFavorite()
+        else
+            addToFavorite()
 
         isFavorite = !isFavorite
         setFavorite()

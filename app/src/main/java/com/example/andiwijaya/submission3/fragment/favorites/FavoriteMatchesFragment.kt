@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Favorite
 import com.example.andiwijaya.submission3.db.database
+import kotlinx.android.synthetic.main.favorite_match_layout.view.*
 import kotlinx.android.synthetic.main.last_match_layout.view.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
@@ -26,8 +27,8 @@ class FavoriteMatchesFragment : Fragment() {
 
         swipeRefresh = view.findViewById(R.id.swipeRefreshLayout)
         adapter = FavoriteMatchesAdapter(favorites, view.context)
-        view.lastMatchRV.layoutManager = LinearLayoutManager(context)
-        view.lastMatchRV.adapter = adapter
+        view.favoriteMatchRV.layoutManager = LinearLayoutManager(context)
+        view.favoriteMatchRV.adapter = adapter
         showFavorite()
 
         return view

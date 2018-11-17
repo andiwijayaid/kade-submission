@@ -53,9 +53,10 @@ class NextMatchFragment : Fragment(), MatchesView {
         )
 
         adapter = MainAdapter(matches) {
-            activity?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
+            context?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
                 "ID" to "${it.matchId}")
         }
+
         view.nextMatchRV.layoutManager = LinearLayoutManager(context)
         view.nextMatchRV.adapter = adapter
         val request = ApiRepository()
