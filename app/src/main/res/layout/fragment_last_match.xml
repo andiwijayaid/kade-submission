@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@color/colorPrimary">
 
-        <TextView
-                android:text="@string/my_favorite"
+        <Spinner
+                android:id="@+id/leagueSpinner"
                 android:layout_width="match_parent"
-                android:textColor="#fff"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"/>
 
-    </android.support.v7.widget.Toolbar>
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginTop="-12dp"
+                android:layout_marginBottom="-12dp"
+                android:indeterminate="true"/>
+
+    </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:layout_below="@id/toolbar">
 
         <android.support.v7.widget.RecyclerView
-                android:id="@+id/favoriteMatchRV"
+                android:id="@+id/lastMatchRV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+</LinearLayout>

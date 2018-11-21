@@ -55,60 +55,60 @@ class HomeActivityTest {
 //        Thread.sleep(1000)
 //    }
 
-    @Test
-    fun testFavoritesFeature() {
-
-        // Last match bottom navigation
-        Thread.sleep(500)
-        onView(withId(lastMatchIC)).perform(click())
-
-        Thread.sleep(500)
-        onView(withId(lastMatchRV)).check(matches(isDisplayed()))
-
-        Thread.sleep(500)
-        onView(withId(lastMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        onView(withId(lastMatchRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
-        Thread.sleep(500)
-
-        // Add to favorite
-        onView(withId(add_to_favorite)).perform(click())
-        Thread.sleep(500)
-
-        // checking snackbar
-        onView(withText("Ditambahkan ke favorite")).check(matches(isDisplayed()))
-        Thread.sleep(500)
-        pressBack() // finish() detail activity
-
-        // Favorite bottom navigation
-        Thread.sleep(500)
-        onView(withId(favoriteIC)).perform(click())
-
-        // Counting item in favorite match recyclerview
-        // make sure it has been added
-        onView(withId(favoriteMatchRV)).check(CustomAssertions.hasItemCount(1))
-
-        Thread.sleep(500)
-        onView(withId(favoriteMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
-        onView(withId(favoriteMatchRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        Thread.sleep(500)
-
-        // Removing favorite
-        onView(withId(add_to_favorite)).perform(click())
-
-        // checking snackbar
-        onView(withText("Dihapus dari favorite")).check(matches(isDisplayed()))
-        Thread.sleep(500)
-        pressBack() // finish() detail activity
-
-        // Refresh item with swipe refresh layout
-        onView(withId(swipeRefreshLayout)).perform(swipeDown())
-
-        // Counting item in favorite match recyclerview
-        // make sure it has been removed
-        onView(withId(favoriteMatchRV))?.check(CustomAssertions.hasItemCount(0))
-
-        Thread.sleep(500)
-    }
+//    @Test
+//    fun testFavoritesFeature() {
+//
+//        // Last match bottom navigation
+//        Thread.sleep(500)
+//        onView(withId(lastMatchIC)).perform(click())
+//
+//        Thread.sleep(500)
+//        onView(withId(lastMatchRV)).check(matches(isDisplayed()))
+//
+//        Thread.sleep(500)
+//        onView(withId(lastMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
+//        onView(withId(lastMatchRV)).perform(
+//            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+//        Thread.sleep(500)
+//
+//        // Add to favorite
+//        onView(withId(add_to_favorite)).perform(click())
+//        Thread.sleep(500)
+//
+//        // checking snackbar
+//        onView(withText("Ditambahkan ke favorite")).check(matches(isDisplayed()))
+//        Thread.sleep(500)
+//        pressBack() // finish() detail activity
+//
+//        // FavoriteMatch bottom navigation
+//        Thread.sleep(500)
+//        onView(withId(favoriteIC)).perform(click())
+//
+//        // Counting item in favorite match recyclerview
+//        // make sure it has been added
+//        onView(withId(favoriteMatchRV)).check(CustomAssertions.hasItemCount(1))
+//
+//        // back to match detail from a match in favorite
+//        Thread.sleep(500)
+//        onView(withId(favoriteMatchRV)).perform(
+//            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+//        Thread.sleep(500)
+//
+//        // Removing favorite
+//        onView(withId(add_to_favorite)).perform(click())
+//
+//        // checking snackbar
+//        onView(withText("Dihapus dari favorite")).check(matches(isDisplayed()))
+//        Thread.sleep(500)
+//        pressBack() // finish() detail activity
+//
+//        // Refresh item with swipe refresh layout
+//        onView(withId(swipeRefreshLayout)).perform(swipeDown())
+//
+//        // Counting item in favorite match recyclerview
+//        // make sure it has been removed
+//        onView(withId(favoriteMatchRV))?.check(CustomAssertions.hasItemCount(0))
+//
+//        Thread.sleep(500)
+//    }
 }

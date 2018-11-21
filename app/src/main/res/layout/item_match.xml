@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="3dp"
+        android:layout_margin="4dp"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:id="@+id/matchLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tanggal"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+
+        <TextView
+                android:id="@+id/timeTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tanggal"
+                android:gravity="center"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/homeNameTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:text="@string/home"/>
+
+            <TextView
+                    android:id="@+id/homeScoreTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:text="@string/_0"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/vs"/>
+
+            <TextView
+                    android:id="@+id/awayScoreTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:text="@string/_0"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/awayNameTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:gravity="start"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:text="@string/away"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

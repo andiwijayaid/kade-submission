@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Match
+import com.example.andiwijaya.submission3.util.formatDate
+import com.example.andiwijaya.submission3.util.formatTimeToGMT
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MainAdapter(private val matches: MutableList<Match>, private val listener: (Match) -> Unit) :
@@ -17,7 +19,7 @@ class MainAdapter(private val matches: MutableList<Match>, private val listener:
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MatchViewHolder {
         return MatchViewHolder(
             LayoutInflater.from(p0.context).inflate(
-                R.layout.match_item,
+                R.layout.item_match,
                 p0,
                 false
             )
@@ -38,7 +40,8 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)
     val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
     val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
-    val tanggalTV: TextView = view.findViewById(R.id.tanggalTV)
+    val tanggalTV: TextView = view.findViewById(R.id.dateTV)
+    val timeTV: TextView = view.findViewById(R.id.timeTV)
     val matchLL: LinearLayout = view.findViewById(R.id.matchLL)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
@@ -46,7 +49,8 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         awayNameTV.text = matches.awayTeam
         homeScoreTV.text = matches.homeScore
         awayScoreTV.text = matches.awayScore
-        tanggalTV.text = matches.date
+        tanggalTV.text = formatDate(matches.date!!)
+        timeTV.text = formatTimeToGMT(matches.time!!)
 
         matchLL.onClick { listener(matches) }
     }

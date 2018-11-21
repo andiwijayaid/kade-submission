@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
-import com.example.andiwijaya.submission3.fragment.favorites.FavoriteMatchesFragment
-import com.example.andiwijaya.submission3.fragment.lastmatch.LastMatchFragment
-import com.example.andiwijaya.submission3.fragment.nextmatch.NextMatchFragment
+import com.example.andiwijaya.submission3.favorites.FavoritesFragment
+import com.example.andiwijaya.submission3.matches.MatchesFragment
+import com.example.andiwijaya.submission3.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -17,12 +17,12 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                lastMatchIC -> {
-                    loadLastMatchesFragment(savedInstanceState)
+                matchesIC -> {
+                    loadMatchesFragment(savedInstanceState)
                 }
 
-                nextMatchIC -> {
-                    loadNextMatchesFragment(savedInstanceState)
+                teamsIC -> {
+                    loadTeamsFragment(savedInstanceState)
                 }
 
                 favoriteIC -> {
@@ -32,27 +32,27 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
-        bottomNavigation.selectedItemId = nextMatchIC
+        bottomNavigation.selectedItemId = teamsIC
     }
 
-    private fun loadLastMatchesFragment(savedInstanceState: Bundle?) {
+    private fun loadMatchesFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    LastMatchFragment(), LastMatchFragment::class.java.simpleName)
+                    MatchesFragment(), MatchesFragment::class.java.simpleName)
                 .commit()
         }
     }
 
-    private fun loadNextMatchesFragment(savedInstanceState: Bundle?) {
+    private fun loadTeamsFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    NextMatchFragment(), NextMatchFragment::class.java.simpleName)
+                    TeamsFragment(), TeamsFragment::class.java.simpleName)
                 .commit()
         }
     }
@@ -63,7 +63,8 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
+                    FavoritesFragment(), FavoritesFragment::class.java.simpleName
+                )
                 .commit()
         }
     }

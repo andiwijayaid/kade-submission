@@ -1,11 +1,15 @@
-package com.example.andiwijaya.submission3.fragment.nextmatch
+package com.example.andiwijaya.submission3.matches.nextmatch
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.matches.MainAdapter
@@ -16,14 +20,16 @@ import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import com.example.andiwijaya.submission3.R.color.colorAccent
-import com.example.andiwijaya.submission3.detail.MatchDetailActivity
-import kotlinx.android.synthetic.main.next_match_layout.*
-import kotlinx.android.synthetic.main.next_match_layout.view.*
+import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
+import com.example.andiwijaya.submission3.util.gone
+import kotlinx.android.synthetic.main.fragment_next_match.*
+import kotlinx.android.synthetic.main.fragment_next_match.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
 
 class NextMatchFragment : Fragment(), MatchesView {
 
+    private lateinit var leagueName: String
     private var matches: MutableList<Match> = mutableListOf()
     private lateinit var adapter: MainAdapter
 
@@ -32,7 +38,7 @@ class NextMatchFragment : Fragment(), MatchesView {
     }
 
     override fun hideLoading() {
-        view?.progressBar?.invisible()
+        view?.progressBar?.gone()
     }
 
     override fun showListMatch(data: List<Match>) {
@@ -43,7 +49,7 @@ class NextMatchFragment : Fragment(), MatchesView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.next_match_layout, container, false)
+        val view = inflater.inflate(R.layout.fragment_next_match, container, false)
 
         view.swipeRefreshLayout?.setColorSchemeResources(
             colorAccent,
@@ -53,8 +59,10 @@ class NextMatchFragment : Fragment(), MatchesView {
         )
 
         adapter = MainAdapter(matches) {
-            context?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
-                "ID" to "${it.matchId}")
+            context?.applicationContext?.startActivity<MatchDetailActivity>(
+                "FILE_NAME" to "${it.fileName}",
+                "ID" to "${it.matchId}"
+            )
         }
 
         view.nextMatchRV.layoutManager = LinearLayoutManager(context)
@@ -64,6 +72,27 @@ class NextMatchFragment : Fragment(), MatchesView {
 
         val presenter = MatchesPresenter(this@NextMatchFragment, request, gson)
         presenter.getNextMatchList("4328")
+
+        val spinnerItems = resources.getStringArray(R.array.league)
+        val spinnerAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+        view.leagueSpinner.adapter = spinnerAdapter
+        view.leagueSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                leagueName = leagueSpinner.selectedItem.toString()
+                when(leagueName){
+                    "English Premier League" -> presenter.getNextMatchList("4328")
+                    "English League Championship" -> presenter.getNextMatchList("4329")
+                    "German Bundesliga" -> presenter.getNextMatchList("4331")
+                    "Italian Serie A" -> presenter.getNextMatchList("4332")
+                    "French Ligue 1" -> presenter.getNextMatchList("4334")
+                    "Spanish La Liga" -> presenter.getNextMatchList("4335")
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+        }
 
         view.swipeRefreshLayout?.onRefresh {
             presenter.getNextMatchList("4328")

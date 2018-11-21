@@ -2,7 +2,7 @@ package com.example.andiwijaya.submission3.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.example.andiwijaya.submission3.model.Favorite
+import com.example.andiwijaya.submission3.model.FavoriteMatch
 import org.jetbrains.anko.db.*
 
 class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FavoriteTeam.db", null, 1) {
@@ -24,20 +24,20 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favorit
     override fun onCreate(db: SQLiteDatabase) {
         // Here you create tables
         db.createTable(
-            Favorite.TABLE_FAVORITE, true,
-            Favorite.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-            Favorite.MATCH_ID to TEXT,
-            Favorite.MATCH_FILE_NAME to TEXT,
-            Favorite.MATCH_DATE to TEXT,
-            Favorite.HOME_NAME to TEXT,
-            Favorite.AWAY_NAME to TEXT,
-            Favorite.HOME_SCORE to TEXT,
-            Favorite.AWAY_SCORE to TEXT
+            FavoriteMatch.TABLE_FAVORITE, true,
+            FavoriteMatch.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            FavoriteMatch.MATCH_ID to TEXT,
+            FavoriteMatch.MATCH_FILE_NAME to TEXT,
+            FavoriteMatch.MATCH_DATE to TEXT,
+            FavoriteMatch.HOME_NAME to TEXT,
+            FavoriteMatch.AWAY_NAME to TEXT,
+            FavoriteMatch.HOME_SCORE to TEXT,
+            FavoriteMatch.AWAY_SCORE to TEXT
         )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.dropTable(Favorite.TABLE_FAVORITE, true)
+        db.dropTable(FavoriteMatch.TABLE_FAVORITE, true)
     }
 }
 

@@ -13,7 +13,7 @@
             android:theme="@style/AppTheme">
         <activity android:name=".matches.MatchesActivity">
         </activity>
-        <activity android:name=".detail.MatchDetailActivity">
+        <activity android:name="com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity">
         </activity>
         <activity
                 android:name=".splash.SplashScreenActivity"
@@ -25,6 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".home.HomeActivity">
+        </activity>
+        <activity android:name=".SearchMatchActivity">
         </activity>
     </application>
 
