@@ -5,4 +5,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary">
+
+        <TextView
+                android:text="@string/football_app"
+                android:layout_width="match_parent"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <Spinner
+            android:id="@+id/leagueSpinner"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_height="wrap_content"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/teamsRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginBottom="-12dp"
+            android:indeterminate="true"
+            android:layout_alignParentBottom="true"/>
+
 </LinearLayout>

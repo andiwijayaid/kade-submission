@@ -6,7 +6,9 @@ import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
 import com.example.andiwijaya.submission3.fragment.favorites.FavoriteMatchesFragment
 import com.example.andiwijaya.submission3.fragment.matches.MatchesFragment
+import com.example.andiwijaya.submission3.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.backgroundColor
 
 class HomeActivity : AppCompatActivity() {
 
@@ -16,8 +18,12 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                lastMatchIC -> {
+                matchesIC -> {
                     loadMatchesFragment(savedInstanceState)
+                }
+
+                teamsIC -> {
+                    loadTeamsFragment(savedInstanceState)
                 }
 
                 favoriteIC -> {
@@ -37,6 +43,17 @@ class HomeActivity : AppCompatActivity() {
                 .replace(
                     R.id.main_container,
                     MatchesFragment(), MatchesFragment::class.java.simpleName)
+                .commit()
+        }
+    }
+
+    private fun loadTeamsFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    R.id.main_container,
+                    TeamsFragment(), TeamsFragment::class.java.simpleName)
                 .commit()
         }
     }

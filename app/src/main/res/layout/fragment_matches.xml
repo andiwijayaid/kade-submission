@@ -23,7 +23,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <TextView
-                    android:text="Football App"
+                    android:text="@string/football_app"
                     android:layout_width="match_parent"
                     android:textColor="#fff"
                     android:gravity="center"
