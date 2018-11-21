@@ -20,9 +20,11 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_teams.*
 import kotlinx.android.synthetic.main.fragment_teams.view.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.onRefresh
 
 class TeamsFragment : Fragment(), TeamsView {
 
+    private lateinit var leagueName: String
     private var teams: MutableList<Team> = mutableListOf()
     private lateinit var presenter: TeamsPresenter
     private lateinit var adapter: TeamsAdapter
@@ -70,12 +72,16 @@ class TeamsFragment : Fragment(), TeamsView {
         view.leagueSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val leagueName = leagueSpinner.selectedItem.toString()
+                leagueName = leagueSpinner.selectedItem.toString()
                 presenter.getTeamList(leagueName)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
+        }
+
+        view.swipeRefreshLayout.onRefresh {
+            presenter.getTeamList(leagueName)
         }
 
         return view
