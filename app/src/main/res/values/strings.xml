@@ -22,6 +22,7 @@
     <string name="subtitutions">Subtitutions</string>
     <string name="match_has_not_started_yet">match has not started yet</string>
     <string name="football_app">Football App</string>
+    <string name="bell">Bell</string>
 
     <array name="league">
         <item>English Premier League</item>

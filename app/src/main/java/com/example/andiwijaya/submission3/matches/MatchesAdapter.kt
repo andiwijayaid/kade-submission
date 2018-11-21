@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.widget.ImageButton
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.formatDate
 import com.example.andiwijaya.submission3.util.formatTimeToGMT
+import com.example.andiwijaya.submission3.util.gone
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MainAdapter(private val matches: MutableList<Match>, private val listener: (Match) -> Unit) :
@@ -42,7 +44,8 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
     val tanggalTV: TextView = view.findViewById(R.id.dateTV)
     val timeTV: TextView = view.findViewById(R.id.timeTV)
-    val matchLL: LinearLayout = view.findViewById(R.id.matchLL)
+    val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
+    val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
         homeNameTV.text = matches.homeTeam
@@ -53,5 +56,10 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         timeTV.text = formatTimeToGMT(matches.time!!)
 
         matchLL.onClick { listener(matches) }
+
+        // remove bell image button for last match
+        if (matches.homeScore != null) {
+            bellIB.gone()
+        }
     }
 }
