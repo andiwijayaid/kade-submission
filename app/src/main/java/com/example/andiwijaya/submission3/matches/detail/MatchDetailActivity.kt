@@ -42,7 +42,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     }
 
-
     private lateinit var presenter: MatchDetailPresenter
 
     private var menuItem: Menu? = null
