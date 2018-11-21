@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.FavoriteMatch
@@ -39,7 +40,7 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
     val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
     val tanggalTV: TextView = view.findViewById(R.id.dateTV)
-    val matchLL: LinearLayout = view.findViewById(R.id.matchLL)
+    val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
 
     fun bindItem(favorites: FavoriteMatch, listener: (FavoriteMatch) -> Unit) {
         homeNameTV.text = favorites.homeName

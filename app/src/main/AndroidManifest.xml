@@ -13,7 +13,7 @@
             android:theme="@style/AppTheme">
         <activity android:name=".matches.MatchesActivity">
         </activity>
-        <activity android:name="com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity">
+        <activity android:name=".matches.detail.MatchDetailActivity">
         </activity>
         <activity
                 android:name=".splash.SplashScreenActivity"
@@ -27,6 +27,8 @@
         <activity android:name=".home.HomeActivity">
         </activity>
         <activity android:name=".SearchMatchActivity">
+        </activity>
+        <activity android:name=".teams.detail.TeamDetailActivity">
         </activity>
     </application>
 

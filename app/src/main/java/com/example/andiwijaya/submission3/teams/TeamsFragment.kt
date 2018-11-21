@@ -16,6 +16,7 @@ import com.example.andiwijaya.submission3.R.array.league
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.model.Team
+import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_teams.*
 import kotlinx.android.synthetic.main.fragment_teams.view.*
@@ -55,7 +56,7 @@ class TeamsFragment : Fragment(), TeamsView {
         )
 
         adapter = TeamsAdapter(teams) {
-            activity?.applicationContext?.startActivity<HomeActivity>()
+            activity?.applicationContext?.startActivity<TeamDetailActivity>()
         }
 
         view.teamsRV.adapter = adapter
