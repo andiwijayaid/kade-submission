@@ -65,7 +65,7 @@ class TeamsFragment : Fragment(), TeamsView {
 
 
         val spinnerItems = resources.getStringArray(league)
-        val spinnerAdapter = ArrayAdapter(view.context, R.layout.item_spinner, spinnerItems)
+        val spinnerAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         view.leagueSpinner.adapter = spinnerAdapter
         view.leagueSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
