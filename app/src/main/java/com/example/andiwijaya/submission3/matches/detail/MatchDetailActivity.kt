@@ -16,9 +16,7 @@ import com.example.andiwijaya.submission3.db.database
 import com.example.andiwijaya.submission3.model.FavoriteMatch
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.model.Team
-import com.example.andiwijaya.submission3.util.gone
-import com.example.andiwijaya.submission3.util.invisible
-import com.example.andiwijaya.submission3.util.visible
+import com.example.andiwijaya.submission3.util.*
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
@@ -134,20 +132,20 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         swipeRefreshLayout.isRefreshing = false
 
-        data[0].homeGoalDetails = match.homeGoalDetails?.replace(";", "\n")
-        data[0].awayGoalDetails = match.awayGoalDetails?.replace(";", "\n")
+        data[0].homeGoalDetails = replaceSemicolonWithNewRow(match.homeGoalDetails!!)
+        data[0].awayGoalDetails = replaceSemicolonWithNewRow(match.awayGoalDetails!!)
 
-        data[0].homeLineupDefense = match.homeLineupDefense?.replace(";", "\n")
-        data[0].awayLineupDefense = match.awayLineupDefense?.replace(";", "\n")
+        data[0].homeLineupDefense = replaceSemicolonWithNewRow(match.homeLineupDefense!!)
+        data[0].awayLineupDefense = replaceSemicolonWithNewRow(match.awayLineupDefense!!)
 
-        data[0].homeLineupMidfield = match.homeLineupMidfield?.replace(";", "\n")
-        data[0].awayLineupMidfield = match.awayLineupMidfield?.replace(";", "\n")
+        data[0].homeLineupMidfield = replaceSemicolonWithNewRow(match.homeLineupMidfield!!)
+        data[0].awayLineupMidfield = replaceSemicolonWithNewRow(match.awayLineupMidfield!!)
 
-        data[0].homeLineupForward = match.homeLineupForward?.replace(";", "\n")
-        data[0].awayLineupForward = match.awayLineupForward?.replace(";", "\n")
+        data[0].homeLineupForward = replaceSemicolonWithNewRow(match.homeLineupForward!!)
+        data[0].awayLineupForward = replaceSemicolonWithNewRow(match.awayLineupForward!!)
 
-        data[0].homeLineupSubstitutes = match.homeLineupSubstitutes?.replace(";", "\n")
-        data[0].awayLineupSubstitutes = match.awayLineupSubstitutes?.replace(";", "\n")
+        data[0].homeLineupSubstitutes = replaceSemicolonWithNewRow(match.homeLineupSubstitutes!!)
+        data[0].awayLineupSubstitutes = replaceSemicolonWithNewRow(match.awayLineupSubstitutes!!)
 
         homeNameTV.text = data[0].homeTeam
         awayNameTV.text = data[0].awayTeam
@@ -176,20 +174,11 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         homeSubsTV.text = data[0].homeLineupSubstitutes
         awaySubsTV.text = data[0].awayLineupSubstitutes
 
-        val df = SimpleDateFormat("dd/MM/yyyy")
-        val result = df.parse(data[0].date)
-        val dayFormat = SimpleDateFormat("E")
-        val namaHari = dayFormat.format(result)
-
-        val newDateFormat = SimpleDateFormat("dd MMM yy")
-        val newDate = newDateFormat.format(result)
-
-        dateTV.text = "$namaHari, $newDate"
+        dateTV.text = formatDate(data[0].date!!)
+        timeTV.text = formatTimeToGMT(data[0].time!!)
 
         presenter.getHomeBadge(data[0].homeTeamId!!)
         presenter.getAwayBadge(data[0].awayTeamId!!)
-
-        Log.d("G", data[0].homeTeamId!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -269,4 +258,5 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         else
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_add_to_favorites)
     }
+
 }

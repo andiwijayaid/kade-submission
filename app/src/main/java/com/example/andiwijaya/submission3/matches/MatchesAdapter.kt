@@ -9,11 +9,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Match
+import com.example.andiwijaya.submission3.util.formatDate
+import com.example.andiwijaya.submission3.util.formatTimeToGMT
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class MainAdapter(private val matches: MutableList<Match>, private val listener: (Match) -> Unit) :
     RecyclerView.Adapter<MatchViewHolder>() {
@@ -55,28 +53,5 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         timeTV.text = formatTimeToGMT(matches.time!!)
 
         matchLL.onClick { listener(matches) }
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun formatDate(date: String): String {
-        val df = SimpleDateFormat("dd/MM/yyyy")
-        val result = df.parse(date)
-        val dayFormat = SimpleDateFormat("E")
-        val namaHari = dayFormat.format(result)
-
-        val newDateFormat = SimpleDateFormat("dd MMM yy")
-        val newDate = newDateFormat.format(result)
-
-        return "$namaHari, $newDate"
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun formatTimeToGMT(time: String): String {
-
-        val df = SimpleDateFormat("HH:mm")
-        val formattedTime = df.parse(time)
-        df.timeZone = TimeZone.getTimeZone("GMT+07")
-
-        return df.format(formattedTime)
     }
 }
