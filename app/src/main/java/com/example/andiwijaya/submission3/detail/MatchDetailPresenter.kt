@@ -11,17 +11,21 @@ import kotlinx.coroutines.async
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MatchDetailPresenter(private val view: MatchDetailView,
-                           private val apiRepository: ApiRepository,
-                           private val gson: Gson) {
+class MatchDetailPresenter(
+    private val view: MatchDetailView,
+    private val apiRepository: ApiRepository,
+    private val gson: Gson
+) {
 
     fun getMatchDetail(fileName: String) {
         view.showLoading()
 
         GlobalScope.async(Dispatchers.Main) {
-            val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getMatchDetail(fileName)).await(),
-                MatchDetailResponse::class.java)
+            val data = gson.fromJson(
+                apiRepository
+                    .doRequest(TheSportDBApi.getMatchDetail(fileName)).await(),
+                MatchDetailResponse::class.java
+            )
 
             view.showMatchDetail(data.event)
             view.hideLoading()

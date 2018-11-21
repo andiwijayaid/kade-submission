@@ -17,8 +17,8 @@ import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import com.example.andiwijaya.submission3.R.color.colorAccent
 import com.example.andiwijaya.submission3.detail.MatchDetailActivity
-import kotlinx.android.synthetic.main.next_match_layout.*
-import kotlinx.android.synthetic.main.next_match_layout.view.*
+import kotlinx.android.synthetic.main.fragment_next_match.*
+import kotlinx.android.synthetic.main.fragment_next_match.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
 
@@ -43,7 +43,7 @@ class NextMatchFragment : Fragment(), MatchesView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.next_match_layout, container, false)
+        val view = inflater.inflate(R.layout.fragment_next_match, container, false)
 
         view.swipeRefreshLayout?.setColorSchemeResources(
             colorAccent,
@@ -53,8 +53,10 @@ class NextMatchFragment : Fragment(), MatchesView {
         )
 
         adapter = MainAdapter(matches) {
-            context?.applicationContext?.startActivity<MatchDetailActivity>("FILE_NAME" to "${it.fileName}",
-                "ID" to "${it.matchId}")
+            context?.applicationContext?.startActivity<MatchDetailActivity>(
+                "FILE_NAME" to "${it.fileName}",
+                "ID" to "${it.matchId}"
+            )
         }
 
         view.nextMatchRV.layoutManager = LinearLayoutManager(context)

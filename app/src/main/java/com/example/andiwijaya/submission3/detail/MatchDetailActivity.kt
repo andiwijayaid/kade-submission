@@ -63,11 +63,13 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         }
     }
 
-    private fun favoriteState(){
+    private fun favoriteState() {
         database.use {
             val result = select(Favorite.TABLE_FAVORITE)
-                .whereArgs("(MATCH_ID = {id})",
-                    "id" to id)
+                .whereArgs(
+                    "(MATCH_ID = {id})",
+                    "id" to id
+                )
             val favorite = result.parseList(classParser<Favorite>())
             if (!favorite.isEmpty()) isFavorite = true
         }
@@ -106,7 +108,8 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             data[0].awayLineupForward,
             data[0].awayLineupSubstitutes,
             data[0].fileName,
-            data[0].matchId)
+            data[0].matchId
+        )
 
         if (data[0].homeGoalDetails == null) {
             noDataTV.visible()
@@ -167,7 +170,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         dateTV.text = "$namaHari, $newDate"
 
-        when(data[0].homeTeam) {
+        when (data[0].homeTeam) {
             "Arsenal" -> homeBadgeIV.setImageResource(R.drawable.arsenal)
             "Bournemouth" -> homeBadgeIV.setImageResource(R.drawable.bournemouth)
             "Brighton" -> homeBadgeIV.setImageResource(R.drawable.brighton)
@@ -190,7 +193,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             "Wolves" -> homeBadgeIV.setImageResource(R.drawable.wolves)
         }
 
-        when(data[0].awayTeam) {
+        when (data[0].awayTeam) {
             "Arsenal" -> awayBadgeIV.setImageResource(R.drawable.arsenal)
             "Bournemouth" -> awayBadgeIV.setImageResource(R.drawable.bournemouth)
             "Brighton" -> awayBadgeIV.setImageResource(R.drawable.brighton)
@@ -246,7 +249,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         setFavorite()
     }
 
-    private fun addToFavorite(){
+    private fun addToFavorite() {
         try {
             database.use {
                 insert(
@@ -257,28 +260,31 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     Favorite.HOME_NAME to match.homeTeam,
                     Favorite.AWAY_NAME to match.awayTeam,
                     Favorite.HOME_SCORE to match.homeScore,
-                    Favorite.AWAY_SCORE to match.awayScore)
+                    Favorite.AWAY_SCORE to match.awayScore
+                )
             }
             detailRL.snackbar("Ditambahkan ke favorite", "undo") {
                 checkFavoriteStat()
                 removeFromFavorite()
             }
-        } catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             Log.d("e", e.toString())
         }
     }
 
-    private fun removeFromFavorite(){
+    private fun removeFromFavorite() {
         try {
             database.use {
-                delete(Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})",
-                    "id" to id)
+                delete(
+                    Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})",
+                    "id" to id
+                )
             }
             detailRL.snackbar("Dihapus dari favorite", "undo") {
                 checkFavoriteStat()
                 addToFavorite()
             }
-        } catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
         }
     }
 

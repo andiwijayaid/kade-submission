@@ -12,13 +12,13 @@ import com.example.andiwijaya.submission3.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.model.Favorite
 import org.jetbrains.anko.startActivity
 
-class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val context: Context)
-    : RecyclerView.Adapter<FavoriteViewHolder>() {
+class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val context: Context) :
+    RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.match_item,
+                R.layout.item_match,
                 parent,
                 false
             )
@@ -29,8 +29,10 @@ class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val c
         holder.bindItem(favorite[position])
 
         holder.matchLL.setOnClickListener {
-            context.startActivity<MatchDetailActivity>("FILE_NAME" to favorite[position].fileName,
-                                                        "ID" to favorite[position].matchId)
+            context.startActivity<MatchDetailActivity>(
+                "FILE_NAME" to favorite[position].fileName,
+                "ID" to favorite[position].matchId
+            )
         }
     }
 
@@ -38,7 +40,7 @@ class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val c
 
 }
 
-class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val homeNameTV: TextView = view.findViewById(R.id.homeNameTV)
     val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)

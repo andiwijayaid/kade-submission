@@ -5,8 +5,7 @@ import android.os.Bundle
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
 import com.example.andiwijaya.submission3.fragment.favorites.FavoriteMatchesFragment
-import com.example.andiwijaya.submission3.fragment.lastmatch.LastMatchFragment
-import com.example.andiwijaya.submission3.fragment.nextmatch.NextMatchFragment
+import com.example.andiwijaya.submission3.fragment.matches.MatchesFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -18,11 +17,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 lastMatchIC -> {
-                    loadLastMatchesFragment(savedInstanceState)
-                }
-
-                nextMatchIC -> {
-                    loadNextMatchesFragment(savedInstanceState)
+                    loadMatchesFragment(savedInstanceState)
                 }
 
                 favoriteIC -> {
@@ -32,27 +27,16 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
-        bottomNavigation.selectedItemId = nextMatchIC
+        bottomNavigation.selectedItemId = teamsIC
     }
 
-    private fun loadLastMatchesFragment(savedInstanceState: Bundle?) {
+    private fun loadMatchesFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    LastMatchFragment(), LastMatchFragment::class.java.simpleName)
-                .commit()
-        }
-    }
-
-    private fun loadNextMatchesFragment(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.main_container,
-                    NextMatchFragment(), NextMatchFragment::class.java.simpleName)
+                    MatchesFragment(), MatchesFragment::class.java.simpleName)
                 .commit()
         }
     }
@@ -63,7 +47,8 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
+                    FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName
+                )
                 .commit()
         }
     }

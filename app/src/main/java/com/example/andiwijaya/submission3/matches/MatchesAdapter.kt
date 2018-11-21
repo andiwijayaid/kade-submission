@@ -17,7 +17,7 @@ class MainAdapter(private val matches: MutableList<Match>, private val listener:
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MatchViewHolder {
         return MatchViewHolder(
             LayoutInflater.from(p0.context).inflate(
-                R.layout.match_item,
+                R.layout.item_match,
                 p0,
                 false
             )
