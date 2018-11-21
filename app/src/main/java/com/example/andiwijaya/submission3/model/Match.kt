@@ -10,6 +10,9 @@ data class Match(
     @SerializedName("strDate")
     var date: String? = null,
 
+    @SerializedName("strTime")
+    var time: String? = null,
+
     @SerializedName("strHomeTeam")
     var homeTeam: String? = null,
 

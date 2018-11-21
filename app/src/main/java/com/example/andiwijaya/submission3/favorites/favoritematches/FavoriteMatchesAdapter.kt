@@ -38,7 +38,7 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)
     val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
     val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
-    val tanggalTV: TextView = view.findViewById(R.id.tanggalTV)
+    val tanggalTV: TextView = view.findViewById(R.id.dateTV)
     val matchLL: LinearLayout = view.findViewById(R.id.matchLL)
 
     fun bindItem(favorites: FavoriteMatch, listener: (FavoriteMatch) -> Unit) {

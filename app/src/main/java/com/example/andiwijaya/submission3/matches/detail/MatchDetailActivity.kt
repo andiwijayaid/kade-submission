@@ -102,6 +102,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showMatchDetail(data: List<Match>) {
         match = Match(
             data[0].date,
+            data[0].time,
             data[0].homeTeam,
             data[0].homeTeamId,
             data[0].awayTeam,
