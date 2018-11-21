@@ -5,23 +5,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/colorPrimary">
-
-        <TextView
-                android:text="@string/my_favorite"
-                android:layout_width="match_parent"
-                android:textColor="#fff"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_height="wrap_content"/>
-
-    </android.support.v7.widget.Toolbar>
-
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"

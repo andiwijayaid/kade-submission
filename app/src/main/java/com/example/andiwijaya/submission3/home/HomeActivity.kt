@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
+import com.example.andiwijaya.submission3.favorites.FavoritesFragment
 import com.example.andiwijaya.submission3.fragment.favorites.FavoriteMatchesFragment
 import com.example.andiwijaya.submission3.fragment.matches.MatchesFragment
 import com.example.andiwijaya.submission3.teams.TeamsFragment
@@ -64,7 +65,7 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName
+                    FavoritesFragment(), FavoritesFragment::class.java.simpleName
                 )
                 .commit()
         }
