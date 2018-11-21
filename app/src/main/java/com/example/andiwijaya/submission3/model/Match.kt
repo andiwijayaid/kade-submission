@@ -13,8 +13,14 @@ data class Match(
     @SerializedName("strHomeTeam")
     var homeTeam: String? = null,
 
+    @SerializedName("idHomeTeam")
+    var homeTeamId: String? = null,
+
     @SerializedName("strAwayTeam")
     var awayTeam: String? = null,
+
+    @SerializedName("idAwayTeam")
+    var awayTeamId: String? = null,
 
     @SerializedName("intHomeScore")
     var homeScore: String? = null,

@@ -1,4 +1,4 @@
-package com.example.andiwijaya.submission3.fragment.lastmatch
+package com.example.andiwijaya.submission3.matches.lastmatch
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,7 +14,7 @@ import com.example.andiwijaya.submission3.model.Match
 import kotlinx.android.synthetic.main.fragment_last_match.*
 import com.example.andiwijaya.submission3.R.color.colorAccent
 import com.example.andiwijaya.submission3.api.ApiRepository
-import com.example.andiwijaya.submission3.detail.MatchDetailActivity
+import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson

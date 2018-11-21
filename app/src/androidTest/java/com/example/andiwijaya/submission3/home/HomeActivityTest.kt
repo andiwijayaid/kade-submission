@@ -80,7 +80,7 @@ class HomeActivityTest {
 //        Thread.sleep(500)
 //        pressBack() // finish() detail activity
 //
-//        // Favorite bottom navigation
+//        // FavoriteMatch bottom navigation
 //        Thread.sleep(500)
 //        onView(withId(favoriteIC)).perform(click())
 //

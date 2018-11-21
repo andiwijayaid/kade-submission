@@ -1,4 +1,4 @@
-package com.example.andiwijaya.submission3.fragment.matches
+package com.example.andiwijaya.submission3.matches
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -7,8 +7,8 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.SearchView
 import android.view.*
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.fragment.lastmatch.LastMatchFragment
-import com.example.andiwijaya.submission3.fragment.nextmatch.NextMatchFragment
+import com.example.andiwijaya.submission3.matches.lastmatch.LastMatchFragment
+import com.example.andiwijaya.submission3.matches.nextmatch.NextMatchFragment
 
 class MatchesFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.andiwijaya.submission3.fragment.matches
+package com.example.andiwijaya.submission3.matches
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

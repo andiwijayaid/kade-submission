@@ -5,11 +5,9 @@ import android.os.Bundle
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
 import com.example.andiwijaya.submission3.favorites.FavoritesFragment
-import com.example.andiwijaya.submission3.fragment.favorites.FavoriteMatchesFragment
-import com.example.andiwijaya.submission3.fragment.matches.MatchesFragment
+import com.example.andiwijaya.submission3.matches.MatchesFragment
 import com.example.andiwijaya.submission3.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
-import org.jetbrains.anko.backgroundColor
 
 class HomeActivity : AppCompatActivity() {
 

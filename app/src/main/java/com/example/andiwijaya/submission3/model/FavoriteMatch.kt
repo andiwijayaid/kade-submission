@@ -1,6 +1,6 @@
 package com.example.andiwijaya.submission3.model
 
-data class Favorite(
+data class FavoriteMatch(
     val id: Long?,
     val matchId: String?,
     val fileName: String?,

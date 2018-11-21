@@ -6,7 +6,7 @@
         android:id="@+id/detailRL"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".detail.MatchDetailActivity">
+        tools:context="com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity">
 
     <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

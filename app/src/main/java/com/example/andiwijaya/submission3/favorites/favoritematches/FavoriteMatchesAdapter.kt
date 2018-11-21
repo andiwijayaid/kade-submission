@@ -1,4 +1,4 @@
-package com.example.andiwijaya.submission3.fragment.favorites
+package com.example.andiwijaya.submission3.favorites.favoritematches
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.detail.MatchDetailActivity
-import com.example.andiwijaya.submission3.model.Favorite
-import org.jetbrains.anko.startActivity
+import com.example.andiwijaya.submission3.model.FavoriteMatch
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val context: Context) :
+class FavoriteMatchesAdapter(private val favoriteMatch: List<FavoriteMatch>, private val context: Context, private val listener: (FavoriteMatch) -> Unit) :
     RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -26,17 +25,10 @@ class FavoriteMatchesAdapter(private val favorite: List<Favorite>, private val c
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bindItem(favorite[position])
-
-        holder.matchLL.setOnClickListener {
-            context.startActivity<MatchDetailActivity>(
-                "FILE_NAME" to favorite[position].fileName,
-                "ID" to favorite[position].matchId
-            )
-        }
+        holder.bindItem(favoriteMatch[position], listener)
     }
 
-    override fun getItemCount(): Int = favorite.size
+    override fun getItemCount(): Int = favoriteMatch.size
 
 }
 
@@ -49,11 +41,13 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tanggalTV: TextView = view.findViewById(R.id.tanggalTV)
     val matchLL: LinearLayout = view.findViewById(R.id.matchLL)
 
-    fun bindItem(favorites: Favorite) {
+    fun bindItem(favorites: FavoriteMatch, listener: (FavoriteMatch) -> Unit) {
         homeNameTV.text = favorites.homeName
         awayNameTV.text = favorites.awayName
         homeScoreTV.text = favorites.homeScore
         awayScoreTV.text = favorites.awayScore
         tanggalTV.text = favorites.matchDate
+
+        matchLL.onClick { listener(favorites) }
     }
 }

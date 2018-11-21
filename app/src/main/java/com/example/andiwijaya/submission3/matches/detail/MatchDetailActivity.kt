@@ -1,4 +1,4 @@
-package com.example.andiwijaya.submission3.detail
+package com.example.andiwijaya.submission3.matches.detail
 
 import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteConstraintException
@@ -13,13 +13,16 @@ import com.example.andiwijaya.submission3.R.drawable.ic_add_to_favorites
 import com.example.andiwijaya.submission3.R.drawable.ic_added_to_favorites
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.db.database
-import com.example.andiwijaya.submission3.model.Favorite
+import com.example.andiwijaya.submission3.model.FavoriteMatch
 import com.example.andiwijaya.submission3.model.Match
+import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
+import kotlinx.android.synthetic.main.item_team.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
@@ -29,6 +32,16 @@ import org.jetbrains.anko.support.v4.onRefresh
 import java.text.SimpleDateFormat
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
+    override fun showHomeBadge(data: List<Team>) {
+        Picasso.get().load(data[0].teamBadge).into(homeBadgeIV)
+
+    }
+
+    override fun showAwayBadge(data: List<Team>) {
+        Picasso.get().load(data[0].teamBadge).into(awayBadgeIV)
+
+    }
+
 
     private lateinit var presenter: MatchDetailPresenter
 
@@ -65,12 +78,12 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     private fun favoriteState() {
         database.use {
-            val result = select(Favorite.TABLE_FAVORITE)
+            val result = select(FavoriteMatch.TABLE_FAVORITE)
                 .whereArgs(
                     "(MATCH_ID = {id})",
                     "id" to id
                 )
-            val favorite = result.parseList(classParser<Favorite>())
+            val favorite = result.parseList(classParser<FavoriteMatch>())
             if (!favorite.isEmpty()) isFavorite = true
         }
     }
@@ -85,12 +98,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         progressBar.gone()
     }
 
+
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun showMatchDetail(data: List<Match>) {
         match = Match(
             data[0].date,
             data[0].homeTeam,
+            data[0].homeTeamId,
             data[0].awayTeam,
+            data[0].awayTeamId,
             data[0].homeScore,
             data[0].awayScore,
             data[0].homeGoalDetails,
@@ -170,51 +186,10 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         dateTV.text = "$namaHari, $newDate"
 
-        when (data[0].homeTeam) {
-            "Arsenal" -> homeBadgeIV.setImageResource(R.drawable.arsenal)
-            "Bournemouth" -> homeBadgeIV.setImageResource(R.drawable.bournemouth)
-            "Brighton" -> homeBadgeIV.setImageResource(R.drawable.brighton)
-            "Burnley" -> homeBadgeIV.setImageResource(R.drawable.burnley)
-            "Cardiff" -> homeBadgeIV.setImageResource(R.drawable.cardiff)
-            "Chelsea" -> homeBadgeIV.setImageResource(R.drawable.chelsea)
-            "Crystal Palace" -> homeBadgeIV.setImageResource(R.drawable.crystal_palace)
-            "Everton" -> homeBadgeIV.setImageResource(R.drawable.everton)
-            "Fulham" -> homeBadgeIV.setImageResource(R.drawable.fulham)
-            "Huddersfield Town" -> homeBadgeIV.setImageResource(R.drawable.huddersfield_town)
-            "Leicester" -> homeBadgeIV.setImageResource(R.drawable.leicester)
-            "Liverpool" -> homeBadgeIV.setImageResource(R.drawable.liverpool)
-            "Man City" -> homeBadgeIV.setImageResource(R.drawable.man_city)
-            "Man United" -> homeBadgeIV.setImageResource(R.drawable.man_united)
-            "Newcastle" -> homeBadgeIV.setImageResource(R.drawable.newcastle)
-            "Southampton" -> homeBadgeIV.setImageResource(R.drawable.southampton)
-            "Tottenham" -> homeBadgeIV.setImageResource(R.drawable.tottenham)
-            "Watford" -> homeBadgeIV.setImageResource(R.drawable.watford)
-            "West Ham" -> homeBadgeIV.setImageResource(R.drawable.westham)
-            "Wolves" -> homeBadgeIV.setImageResource(R.drawable.wolves)
-        }
+        presenter.getHomeBadge(data[0].homeTeamId!!)
+        presenter.getAwayBadge(data[0].awayTeamId!!)
 
-        when (data[0].awayTeam) {
-            "Arsenal" -> awayBadgeIV.setImageResource(R.drawable.arsenal)
-            "Bournemouth" -> awayBadgeIV.setImageResource(R.drawable.bournemouth)
-            "Brighton" -> awayBadgeIV.setImageResource(R.drawable.brighton)
-            "Burnley" -> awayBadgeIV.setImageResource(R.drawable.burnley)
-            "Cardiff" -> awayBadgeIV.setImageResource(R.drawable.cardiff)
-            "Chelsea" -> awayBadgeIV.setImageResource(R.drawable.chelsea)
-            "Crystal Palace" -> awayBadgeIV.setImageResource(R.drawable.crystal_palace)
-            "Everton" -> awayBadgeIV.setImageResource(R.drawable.everton)
-            "Fulham" -> awayBadgeIV.setImageResource(R.drawable.fulham)
-            "Huddersfield Town" -> awayBadgeIV.setImageResource(R.drawable.huddersfield_town)
-            "Leicester" -> awayBadgeIV.setImageResource(R.drawable.leicester)
-            "Liverpool" -> awayBadgeIV.setImageResource(R.drawable.liverpool)
-            "Man City" -> awayBadgeIV.setImageResource(R.drawable.man_city)
-            "Man United" -> awayBadgeIV.setImageResource(R.drawable.man_united)
-            "Newcastle" -> awayBadgeIV.setImageResource(R.drawable.newcastle)
-            "Southampton" -> awayBadgeIV.setImageResource(R.drawable.southampton)
-            "Tottenham" -> awayBadgeIV.setImageResource(R.drawable.tottenham)
-            "Watford" -> awayBadgeIV.setImageResource(R.drawable.watford)
-            "West Ham" -> awayBadgeIV.setImageResource(R.drawable.westham)
-            "Wolves" -> awayBadgeIV.setImageResource(R.drawable.wolves)
-        }
+        Log.d("G", data[0].homeTeamId!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -253,14 +228,14 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         try {
             database.use {
                 insert(
-                    Favorite.TABLE_FAVORITE,
-                    Favorite.MATCH_ID to match.matchId,
-                    Favorite.MATCH_FILE_NAME to match.fileName,
-                    Favorite.MATCH_DATE to match.date,
-                    Favorite.HOME_NAME to match.homeTeam,
-                    Favorite.AWAY_NAME to match.awayTeam,
-                    Favorite.HOME_SCORE to match.homeScore,
-                    Favorite.AWAY_SCORE to match.awayScore
+                    FavoriteMatch.TABLE_FAVORITE,
+                    FavoriteMatch.MATCH_ID to match.matchId,
+                    FavoriteMatch.MATCH_FILE_NAME to match.fileName,
+                    FavoriteMatch.MATCH_DATE to match.date,
+                    FavoriteMatch.HOME_NAME to match.homeTeam,
+                    FavoriteMatch.AWAY_NAME to match.awayTeam,
+                    FavoriteMatch.HOME_SCORE to match.homeScore,
+                    FavoriteMatch.AWAY_SCORE to match.awayScore
                 )
             }
             detailRL.snackbar("Ditambahkan ke favorite", "undo") {
@@ -276,7 +251,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         try {
             database.use {
                 delete(
-                    Favorite.TABLE_FAVORITE, "(MATCH_ID = {id})",
+                    FavoriteMatch.TABLE_FAVORITE, "(MATCH_ID = {id})",
                     "id" to id
                 )
             }

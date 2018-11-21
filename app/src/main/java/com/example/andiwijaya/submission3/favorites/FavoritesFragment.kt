@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.view.*
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.fragment.favorites.FavoriteMatchesFragment
+import com.example.andiwijaya.submission3.favorites.favoritematches.FavoriteMatchesFragment
 
 class FavoritesFragment : Fragment() {
 
