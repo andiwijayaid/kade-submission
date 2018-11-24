@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.util.invisible
-import com.example.andiwijaya.submission3.util.visible
 import com.example.andiwijaya.submission3.R.array.league
 import com.example.andiwijaya.submission3.api.ApiRepository
-import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
+import com.example.andiwijaya.submission3.util.invisible
+import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_teams.*
 import kotlinx.android.synthetic.main.fragment_teams.view.*
@@ -56,7 +54,9 @@ class TeamsFragment : Fragment(), TeamsView {
         )
 
         adapter = TeamsAdapter(teams) {
-            activity?.applicationContext?.startActivity<TeamDetailActivity>()
+            activity?.applicationContext?.startActivity<TeamDetailActivity>(
+                "ID" to it.teamId
+            )
         }
 
         view.teamsRV.adapter = adapter
@@ -65,7 +65,6 @@ class TeamsFragment : Fragment(), TeamsView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = TeamsPresenter(this, request, gson)
-
 
         val spinnerItems = resources.getStringArray(league)
         val spinnerAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
