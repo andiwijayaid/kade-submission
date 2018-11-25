@@ -9,8 +9,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.R.drawable.ic_add_to_favorites
-import com.example.andiwijaya.submission3.R.drawable.ic_added_to_favorites
+import com.example.andiwijaya.submission3.R.drawable.ic_starred
+import com.example.andiwijaya.submission3.R.drawable.ic_unstarred
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.db.database
 import com.example.andiwijaya.submission3.model.FavoriteMatch
@@ -41,7 +41,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     private lateinit var presenter: MatchDetailPresenter
-
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
     private lateinit var fileName: String
@@ -75,7 +74,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     private fun favoriteState() {
         database.use {
-            val result = select(FavoriteMatch.TABLE_FAVORITE)
+            val result = select(FavoriteMatch.TABLE_MATCH_FAVORITE)
                 .whereArgs(
                     "(MATCH_ID = {id})",
                     "id" to id
@@ -217,7 +216,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         try {
             database.use {
                 insert(
-                    FavoriteMatch.TABLE_FAVORITE,
+                    FavoriteMatch.TABLE_MATCH_FAVORITE,
                     FavoriteMatch.MATCH_ID to match.matchId,
                     FavoriteMatch.MATCH_FILE_NAME to match.fileName,
                     FavoriteMatch.MATCH_DATE to match.date,
@@ -240,7 +239,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         try {
             database.use {
                 delete(
-                    FavoriteMatch.TABLE_FAVORITE, "(MATCH_ID = {id})",
+                    FavoriteMatch.TABLE_MATCH_FAVORITE, "(MATCH_ID = {id})",
                     "id" to id
                 )
             }
@@ -254,9 +253,9 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     private fun setFavorite() {
         if (isFavorite)
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_added_to_favorites)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_starred)
         else
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_add_to_favorites)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_unstarred)
     }
 
 }

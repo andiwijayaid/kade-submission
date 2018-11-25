@@ -27,7 +27,7 @@ class FavoriteMatchesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_favorite_matches, container, false)
 
         swipeRefresh = view.findViewById(R.id.swipeRefreshLayout)
-        adapter = FavoriteMatchesAdapter(favoriteMatches, view.context) {
+        adapter = FavoriteMatchesAdapter(favoriteMatches) {
             startActivity<MatchDetailActivity>(
                 "FILE_NAME" to it.fileName,
                 "ID" to it.matchId
@@ -53,7 +53,7 @@ class FavoriteMatchesFragment : Fragment() {
     private fun showFavorite() {
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(FavoriteMatch.TABLE_FAVORITE)
+            val result = select(FavoriteMatch.TABLE_MATCH_FAVORITE)
             val favorite = result.parseList(classParser<FavoriteMatch>())
             favoriteMatches.addAll(favorite)
             adapter.notifyDataSetChanged()
