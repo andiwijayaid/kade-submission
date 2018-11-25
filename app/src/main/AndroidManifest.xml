@@ -30,7 +30,7 @@
         </activity>
         <activity android:name=".teams.detail.TeamDetailActivity">
         </activity>
-        <activity android:name=".teams.detail.players.PlayerDetailActivity">
+        <activity android:name=".teams.detail.players.detail.PlayerDetailActivity">
         </activity>
     </application>
 

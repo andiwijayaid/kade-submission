@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Player
+import com.example.andiwijaya.submission3.teams.detail.players.detail.PlayerDetailActivity
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
@@ -39,20 +40,22 @@ class PlayersFragment : Fragment(), PlayerView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_team_players, container, false)
+        val TEAM_ID = activity?.intent?.getStringExtra("ID")
 
         adapter = PlayerAdapter(players) {
-            context?.applicationContext?.startActivity<PlayerDetailActivity>()
+            context?.applicationContext?.startActivity<PlayerDetailActivity>(
+                "PLAYER_ID" to it.playerId,
+                "TEAM_ID" to it.teamId
+            )
         }
 
         view.playersRV.layoutManager = GridLayoutManager(context, 2)
         view.playersRV.adapter = adapter
 
-        val ID = activity?.intent?.getStringExtra("ID")
-
         val request = ApiRepository()
         val gson = Gson()
         presenter = PlayerPresenter(this, request, gson)
-        presenter.getPlayers(ID!!)
+        presenter.getPlayers(TEAM_ID!!)
 
         return view
     }

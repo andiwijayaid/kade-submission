@@ -10,6 +10,9 @@ data class Player(
     @SerializedName("idPlayer")
     var playerId: String? = null,
 
+    @SerializedName("idTeam")
+    var teamId: String? = null,
+
     @SerializedName("strPlayer")
     var playerName: String? = null,
 

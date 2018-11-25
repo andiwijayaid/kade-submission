@@ -24,6 +24,15 @@
     <string name="football_app">Football App</string>
     <string name="bell">Bell</string>
     <string name="star">star</string>
+    <string name="weight">WEIGHT</string>
+    <string name="height">HEIGHT</string>
+    <string name="age">AGE</string>
+    <string name="player_position">Player Position</string>
+    <string name="player_name">Player Name</string>
+    <string name="profile">Profile</string>
+    <string name="no_pict">NO PICT</string>
+    <string name="no">-</string>
+    <string name="biography">Biography</string>
 
     <array name="league">
         <item>English Premier League</item>

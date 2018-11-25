@@ -18,7 +18,7 @@ class PlayerPresenter(private val view: PlayerView,
 
         GlobalScope.launch(contextPool.main) {
             val data = gson.fromJson(
-                apiRepository.doRequest(TheSportDBApi.getPlayer(teamId)).await(),
+                apiRepository.doRequest(TheSportDBApi.getPlayers(teamId)).await(),
                 PlayerResponse::class.java
             )
 

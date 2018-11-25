@@ -1,5 +1,6 @@
 package com.example.andiwijaya.submission3.teams.detail.players
 
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Player
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class PlayerAdapter(private val players: MutableList<Player>, private val listener: (Player) -> Unit) :
     RecyclerView.Adapter<PlayerViewHolder>() {
@@ -33,6 +35,7 @@ class PlayerAdapter(private val players: MutableList<Player>, private val listen
 
 class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+    val playerCardView = view.findViewById<CardView>(R.id.playerCV)
     val playerImage = view.findViewById<ImageView>(R.id.playerIV)
     val playerName = view.findViewById<TextView>(R.id.playerNameTV)
     val playerPosition = view.findViewById<TextView>(R.id.playerPositionTV)
@@ -43,6 +46,8 @@ class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
         playerName.text = players.playerName
         playerPosition.text = players.playerPosition
+
+        playerCardView.onClick { listener(players) }
     }
 
 }
