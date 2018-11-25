@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginTop="-12dp"
+            android:layout_marginBottom="-12dp"
+            android:indeterminate="true"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/playersRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

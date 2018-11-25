@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_team_overview.*
 class OverviewFragment : Fragment(), TeamDetailView {
 
     private lateinit var presenter: TeamDetailPresenter
-    private lateinit var teamId: String
 
     override fun showLoading() {
         view?.progressBar?.visible()

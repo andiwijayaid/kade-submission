@@ -16,6 +16,7 @@ import com.example.andiwijaya.submission3.favorites.FavoritesViewPagerAdapter
 import com.example.andiwijaya.submission3.model.FavoriteTeam
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.overview.OverviewFragment
+import com.example.andiwijaya.submission3.teams.detail.players.PlayersFragment
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_team_detail.*
@@ -55,7 +56,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
         val mAdapter = FavoritesViewPagerAdapter(supportFragmentManager)
         mAdapter.addFragment(OverviewFragment(), "overview")
-        mAdapter.addFragment(OverviewFragment(), "players")
+        mAdapter.addFragment(PlayersFragment(), "players")
 
         app_bar_layout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
             var isShow = true
