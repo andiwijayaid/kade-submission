@@ -2,16 +2,19 @@ package com.example.andiwijaya.submission3.matches.lastmatch
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.color.colorAccent
 import com.example.andiwijaya.submission3.api.ApiRepository
+import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.matches.MainAdapter
+import com.example.andiwijaya.submission3.matches.MatchesFragment
 import com.example.andiwijaya.submission3.matches.MatchesPresenter
 import com.example.andiwijaya.submission3.matches.MatchesView
 import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
@@ -21,14 +24,15 @@ import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_last_match.*
 import kotlinx.android.synthetic.main.fragment_last_match.view.*
+import kotlinx.android.synthetic.main.fragment_matches.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
 
 class LastMatchFragment : Fragment(), MatchesView {
 
     private lateinit var leagueName: String
-    private var matches: MutableList<Match> = mutableListOf()
-    private lateinit var adapter: MainAdapter
+     var matches: MutableList<Match> = mutableListOf()
+     lateinit var adapter: MainAdapter
 
     override fun showLoading() {
         view?.progressBar?.visible()
@@ -61,6 +65,7 @@ class LastMatchFragment : Fragment(), MatchesView {
                 "ID" to "${it.matchId}"
             )
         }
+
         view.lastMatchRV.adapter = adapter
         view.lastMatchRV.layoutManager = LinearLayoutManager(context)
         val request = ApiRepository()

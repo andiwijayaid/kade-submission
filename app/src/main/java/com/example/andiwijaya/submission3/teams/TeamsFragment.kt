@@ -2,15 +2,17 @@ package com.example.andiwijaya.submission3.teams
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.array.league
 import com.example.andiwijaya.submission3.api.ApiRepository
+import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
 import com.example.andiwijaya.submission3.util.invisible
@@ -20,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_teams.*
 import kotlinx.android.synthetic.main.fragment_teams.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.toast
+
 
 class TeamsFragment : Fragment(), TeamsView {
 
@@ -45,6 +49,9 @@ class TeamsFragment : Fragment(), TeamsView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_teams, container, false)
+
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setSupportActionBar(view.toolbar)
 
         view.swipeRefreshLayout?.setColorSchemeResources(
             R.color.colorAccent,
@@ -87,4 +94,40 @@ class TeamsFragment : Fragment(), TeamsView {
         return view
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater?.inflate(R.menu.search_menu, menu)
+        val item = menu?.findItem(R.id.search)
+        val searchView = SearchView((context as HomeActivity).getSupportActionBar()?.getThemedContext())
+        MenuItemCompat.setActionView(item, searchView)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                filter(p0)
+                return false
+            }
+
+        })
+
+    }
+
+    private fun filter(p0: String?) {
+
+        val filteredList = mutableListOf<Team>()
+
+        for (team: Team in teams) {
+            if (team.teamName?.toLowerCase()!!.contains(p0!!.toLowerCase())) {
+                filteredList.add(team)
+            }
+        }
+
+        adapter.filterList(filteredList)
+
+    }
 }

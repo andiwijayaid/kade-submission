@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".home.HomeActivity">
         </activity>
-        <activity android:name=".SearchMatchActivity">
+        <activity android:name=".searchview.SearchMatchActivity">
         </activity>
         <activity android:name=".teams.detail.TeamDetailActivity">
         </activity>

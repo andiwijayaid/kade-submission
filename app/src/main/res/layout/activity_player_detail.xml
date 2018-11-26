@@ -57,7 +57,7 @@
 
                 <TextView
                         android:id="@+id/noPictTV"
-                        android:text="@string/no_pict"
+                        android:text="@string/no_pic"
                         android:alpha="0.2"
                         android:textSize="48sp"
                         android:visibility="gone"
@@ -169,7 +169,7 @@
 
         <LinearLayout
                 android:orientation="vertical"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

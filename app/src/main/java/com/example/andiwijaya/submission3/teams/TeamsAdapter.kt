@@ -11,7 +11,7 @@ import com.example.andiwijaya.submission3.model.Team
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
-class TeamsAdapter(private val teams: List<Team>, private val listener: (Team) -> Unit) :
+class TeamsAdapter(private var teams: List<Team>, private val listener: (Team) -> Unit) :
     RecyclerView.Adapter<TeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
@@ -30,6 +30,10 @@ class TeamsAdapter(private val teams: List<Team>, private val listener: (Team) -
 
     override fun getItemCount(): Int = teams.size
 
+    fun filterList(filteredList: MutableList<Team>) {
+        teams = filteredList
+        notifyDataSetChanged()
+    }
 }
 
 class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view){

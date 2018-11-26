@@ -1,6 +1,5 @@
 package com.example.andiwijaya.submission3.matches
 
-import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,7 @@ import com.example.andiwijaya.submission3.util.formatTimeToGMT
 import com.example.andiwijaya.submission3.util.gone
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class MainAdapter(private val matches: MutableList<Match>, private val listener: (Match) -> Unit) :
+class MainAdapter(private var matches: MutableList<Match>, private val listener: (Match) -> Unit) :
     RecyclerView.Adapter<MatchViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MatchViewHolder {
@@ -30,7 +29,6 @@ class MainAdapter(private val matches: MutableList<Match>, private val listener:
 
     override fun getItemCount(): Int = matches.size
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(p0: MatchViewHolder, p1: Int) {
         p0.bindItem(matches[p1], listener)
     }
@@ -52,7 +50,11 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         awayNameTV.text = matches.awayTeam
         homeScoreTV.text = matches.homeScore
         awayScoreTV.text = matches.awayScore
-        tanggalTV.text = formatDate(matches.date!!)
+        if (matches.date != null) {
+            tanggalTV.text = formatDate(matches.date!!)
+        } else {
+            tanggalTV.text = null
+        }
         timeTV.text = formatTimeToGMT(matches.time!!)
 
         matchLL.onClick { listener(matches) }
