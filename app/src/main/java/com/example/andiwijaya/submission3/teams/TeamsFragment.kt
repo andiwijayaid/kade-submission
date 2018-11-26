@@ -15,6 +15,7 @@ import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
+import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
@@ -22,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_teams.*
 import kotlinx.android.synthetic.main.fragment_teams.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.toast
 
 
 class TeamsFragment : Fragment(), TeamsView {
@@ -109,25 +109,17 @@ class TeamsFragment : Fragment(), TeamsView {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                filter(p0)
+                leagueSpinner.gone()
+                presenter.getTeamByNameList(p0!!)
                 return false
             }
-
         })
 
-    }
-
-    private fun filter(p0: String?) {
-
-        val filteredList = mutableListOf<Team>()
-
-        for (team: Team in teams) {
-            if (team.teamName?.toLowerCase()!!.contains(p0!!.toLowerCase())) {
-                filteredList.add(team)
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
+            override fun onClose(): Boolean {
+                leagueSpinner.visible()
+                return true
             }
-        }
-
-        adapter.filterList(filteredList)
-
+        })
     }
 }

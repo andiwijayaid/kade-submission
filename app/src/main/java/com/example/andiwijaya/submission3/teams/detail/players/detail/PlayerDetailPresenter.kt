@@ -20,7 +20,7 @@ class PlayerDetailPresenter(
 
         GlobalScope.async (Dispatchers.Main){
             val data = gson.fromJson(
-                apiRepository.doRequest(TheSportDBApi.getPlayerDetail(playerId)).await(),
+                apiRepository.doRequest(TheSportDBApi.getPlayerDetailById(playerId)).await(),
                 PlayerDetailResponse::class.java
             )
 
@@ -35,7 +35,7 @@ class PlayerDetailPresenter(
         GlobalScope.async(Dispatchers.Main) {
             val data = gson.fromJson(
                 apiRepository
-                    .doRequest(TheSportDBApi.getTeamDetail(teamId)).await(),
+                    .doRequest(TheSportDBApi.getTeamByIdDetail(teamId)).await(),
                 TeamResponse::class.java
             )
 

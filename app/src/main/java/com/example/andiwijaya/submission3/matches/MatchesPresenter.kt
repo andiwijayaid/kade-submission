@@ -23,7 +23,7 @@ class MatchesPresenter(
         GlobalScope.launch(context.main) {
             val data = gson.fromJson(
                 apiRepository
-                    .doRequest(TheSportDBApi.getLastMatch(id)).await(),
+                    .doRequest(TheSportDBApi.getLastMatchByLeagueId(id)).await(),
                 MatchResponse::class.java
             )
 
@@ -38,7 +38,7 @@ class MatchesPresenter(
         GlobalScope.launch(Dispatchers.Main) {
             val data = gson.fromJson(
                 apiRepository
-                    .doRequest(TheSportDBApi.getNextMatch(id)).await(),
+                    .doRequest(TheSportDBApi.getNextMatchByLeagueId(id)).await(),
                 MatchResponse::class.java
             )
 

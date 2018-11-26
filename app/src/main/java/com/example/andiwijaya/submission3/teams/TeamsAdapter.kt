@@ -29,11 +29,6 @@ class TeamsAdapter(private var teams: List<Team>, private val listener: (Team) -
     }
 
     override fun getItemCount(): Int = teams.size
-
-    fun filterList(filteredList: MutableList<Team>) {
-        teams = filteredList
-        notifyDataSetChanged()
-    }
 }
 
 class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view){

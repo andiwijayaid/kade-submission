@@ -6,7 +6,6 @@ import com.example.andiwijaya.submission3.api.TheSportDBApi
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.model.MatchResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Test
@@ -44,7 +43,7 @@ class MatchesPresenterTest {
 
         GlobalScope.launch {
             `when`(gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getLastMatch(id)).await(),
+                .doRequest(TheSportDBApi.getLastMatchByLeagueId(id)).await(),
                 MatchResponse::class.java
                 )).thenReturn(response)
 
