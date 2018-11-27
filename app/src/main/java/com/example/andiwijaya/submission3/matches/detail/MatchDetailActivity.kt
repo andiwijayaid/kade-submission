@@ -20,14 +20,12 @@ import com.example.andiwijaya.submission3.util.*
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_match_detail.*
-import kotlinx.android.synthetic.main.item_team.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
-import java.text.SimpleDateFormat
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showHomeBadge(data: List<Team>) {

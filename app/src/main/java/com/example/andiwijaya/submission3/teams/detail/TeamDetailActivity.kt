@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.db.database

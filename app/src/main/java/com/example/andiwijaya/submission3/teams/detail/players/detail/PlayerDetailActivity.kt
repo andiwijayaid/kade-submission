@@ -1,8 +1,8 @@
 package com.example.andiwijaya.submission3.teams.detail.players.detail
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
+import android.support.v7.app.AppCompatActivity
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Player

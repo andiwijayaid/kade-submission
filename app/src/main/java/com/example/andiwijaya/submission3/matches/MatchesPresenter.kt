@@ -57,7 +57,9 @@ class MatchesPresenter(
                 EventResponse::class.java
             )
 
-            view.showListMatch(data.event)
+            if (!data.event.isNullOrEmpty()) {
+                view.showListMatch(data.event)
+            }
             view.hideLoading()
         }
     }

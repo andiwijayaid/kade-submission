@@ -1,7 +1,7 @@
 package com.example.andiwijaya.submission3.searchview
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.example.andiwijaya.submission3.R

@@ -1,9 +1,9 @@
 package com.example.andiwijaya.submission3.splash
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.home.HomeActivity
 
@@ -21,4 +21,5 @@ class SplashScreenActivity : AppCompatActivity() {
             }
         }, 1000L)
     }
+
 }

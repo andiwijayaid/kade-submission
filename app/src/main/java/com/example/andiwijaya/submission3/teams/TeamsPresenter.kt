@@ -38,7 +38,9 @@ class TeamsPresenter(
                 TeamResponse::class.java
             )
 
-            view.showListTeam(data.teams)
+            if (!data.teams.isNullOrEmpty()) {
+                view.showListTeam(data.teams)
+            }
             view.hideLoading()
         }
     }

@@ -3,17 +3,13 @@ package com.example.andiwijaya.submission3.matches
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.view.MenuItemCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.*
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.matches.lastmatch.LastMatchFragment
 import com.example.andiwijaya.submission3.matches.nextmatch.NextMatchFragment
-import com.example.andiwijaya.submission3.model.Match
-import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.searchview.SearchMatchActivity
 import kotlinx.android.synthetic.main.fragment_matches.view.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -46,10 +42,9 @@ class MatchesFragment : Fragment() {
 
         inflater?.inflate(R.menu.search_menu, menu)
         val item = menu?.findItem(R.id.search)
-        val searchView = SearchView((context as HomeActivity).getSupportActionBar()?.getThemedContext())
-        MenuItemCompat.setActionView(item, searchView)
+        val searchView = item?.actionView as SearchView?
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 startActivity<SearchMatchActivity>("SEARCH_QUERY" to p0)
                 return false

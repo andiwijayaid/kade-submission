@@ -2,7 +2,6 @@ package com.example.andiwijaya.submission3.teams
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.array.league
 import com.example.andiwijaya.submission3.api.ApiRepository
-import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
 import com.example.andiwijaya.submission3.util.gone
@@ -31,6 +29,7 @@ class TeamsFragment : Fragment(), TeamsView {
     private var teams: MutableList<Team> = mutableListOf()
     private lateinit var presenter: TeamsPresenter
     private lateinit var adapter: TeamsAdapter
+    private lateinit var gson: Gson
 
     override fun showLoading() {
         view?.progressBar?.visible()
@@ -70,7 +69,7 @@ class TeamsFragment : Fragment(), TeamsView {
         view.teamsRV.layoutManager = LinearLayoutManager(context)
 
         val request = ApiRepository()
-        val gson = Gson()
+        gson = Gson()
         presenter = TeamsPresenter(this, request, gson)
 
         val spinnerItems = resources.getStringArray(league)
@@ -94,32 +93,37 @@ class TeamsFragment : Fragment(), TeamsView {
         return view
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
 
         inflater?.inflate(R.menu.search_menu, menu)
         val item = menu?.findItem(R.id.search)
-        val searchView = SearchView((context as HomeActivity).getSupportActionBar()?.getThemedContext())
-        MenuItemCompat.setActionView(item, searchView)
+        val searchView = item?.actionView as SearchView?
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                leagueSpinner.gone()
+                teams.clear()
                 presenter.getTeamByNameList(p0!!)
                 return false
             }
         })
 
-        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
-            override fun onClose(): Boolean {
-                leagueSpinner.visible()
+        item?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                spinnerLL.gone()
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                presenter.getTeamList(leagueName)
+                spinnerLL.visible()
                 return true
             }
         })
     }
+
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Team
-import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailPresenter
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailView
 import com.example.andiwijaya.submission3.util.gone
