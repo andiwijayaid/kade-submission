@@ -1,6 +1,7 @@
 package com.example.andiwijaya.submission3.util
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,4 +42,16 @@ fun formatDate(date: String): String {
 
 fun replaceSemicolonWithNewRow(string: String): String {
     return string.replace(";", "\n")
+}
+
+fun splitDateString(date: String): String {
+    val namesList = date.split("/")
+//    Log.d("A", "${namesList[0]}, ${namesList[1]}, ${namesList[2]}")
+
+    val mDate = Calendar.getInstance()
+    mDate.set(namesList[0].toInt(), namesList[1].toInt(), namesList[2].toInt())
+
+    val dateMillis = mDate.timeInMillis
+
+    return dateMillis.toString()
 }

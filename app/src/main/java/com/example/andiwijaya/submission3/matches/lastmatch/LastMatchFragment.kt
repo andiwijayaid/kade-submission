@@ -55,7 +55,7 @@ class LastMatchFragment : Fragment(), MatchesView {
             android.R.color.holo_red_light
         )
 
-        adapter = MainAdapter(matches) {
+        adapter = MainAdapter(matches, context) {
             activity?.applicationContext?.startActivity<MatchDetailActivity>(
                 "FILE_NAME" to "${it.fileName}",
                 "ID" to "${it.matchId}"

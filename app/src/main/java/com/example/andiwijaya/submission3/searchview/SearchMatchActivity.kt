@@ -48,7 +48,7 @@ class SearchMatchActivity : AppCompatActivity(), MatchesView {
             finish()
         }
 
-        adapter = MainAdapter(matches) {
+        adapter = MainAdapter(matches, applicationContext) {
             applicationContext?.startActivity<MatchDetailActivity>(
                 "FILE_NAME" to "${it.fileName}",
                 "ID" to "${it.matchId}"
