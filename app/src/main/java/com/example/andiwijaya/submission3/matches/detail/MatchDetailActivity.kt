@@ -96,7 +96,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun showMatchDetail(data: List<Match>) {
         match = Match(
-            data[0].date,
+            data[0].dateEvent,
             data[0].time,
             data[0].homeTeam,
             data[0].homeTeamId,
@@ -125,6 +125,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         if (data[0].homeGoalDetails == null) {
             noDataTV.visible()
             detailSV.invisible()
+            progressBar.gone()
         }
 
         swipeRefreshLayout.isRefreshing = false
@@ -171,7 +172,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         homeSubsTV.text = data[0].homeLineupSubstitutes
         awaySubsTV.text = data[0].awayLineupSubstitutes
 
-        dateTV.text = formatDate(data[0].date!!)
+        dateTV.text = formatDate(data[0].dateEvent!!)
         timeTV.text = formatTimeToGMT(data[0].time!!)
 
         presenter.getHomeBadge(data[0].homeTeamId!!)
@@ -217,7 +218,7 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     FavoriteMatch.TABLE_MATCH_FAVORITE,
                     FavoriteMatch.MATCH_ID to match.matchId,
                     FavoriteMatch.MATCH_FILE_NAME to match.fileName,
-                    FavoriteMatch.MATCH_DATE to match.date,
+                    FavoriteMatch.MATCH_DATE to match.dateEvent,
                     FavoriteMatch.HOME_NAME to match.homeTeam,
                     FavoriteMatch.AWAY_NAME to match.awayTeam,
                     FavoriteMatch.HOME_SCORE to match.homeScore,

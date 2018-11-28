@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Match(
 
-    @SerializedName("strDate")
-    var date: String? = null,
+    @SerializedName("dateEvent")
+    var dateEvent: String? = null,
 
     @SerializedName("strTime")
     var time: String? = null,

@@ -20,6 +20,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import com.example.andiwijaya.submission3.util.splitDateString
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -43,16 +44,17 @@ class MainAdapter(private var matches: MutableList<Match>, private val context: 
 
         p0.bellIB.setOnClickListener {
             val intent = Intent(Intent.ACTION_EDIT)
-            intent.setType("vnd.android.cursor.item/event")
+            intent.type = "vnd.android.cursor.item/event"
             intent.putExtra(CalendarContract.Events.TITLE, matches[p1].fileName)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, splitDateString(matches[p1].date!!))
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, matches[p1].date)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, splitDateString(matches[p1].dateEvent!!, matches[p1].time!!))
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, splitDateString(matches[p1].dateEvent!!, matches[p1].time!!)+60*90*1000)
             intent.putExtra(CalendarContract.Events.ALL_DAY, false)
             context?.startActivity(intent)
 
-            Log.d("Date", matches[p1].date)
-            Log.d("Time", matches[p1].time)
-            Log.d("A", splitDateString(matches[p1].date!!))
+            Log.d("START", (splitDateString(matches[p1].dateEvent!!, matches[p1].time!!)-60*60*1000).toString())
+
+            Log.d("END", splitDateString(matches[p1].dateEvent!!, matches[p1].time!!).toString())
+            Log.d("ID", matches[p1].matchId)
 
 //            context?.startActivity(Intent(context, HomeActivity::class.java))
         }
@@ -75,8 +77,8 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         awayNameTV.text = matches.awayTeam
         homeScoreTV.text = matches.homeScore
         awayScoreTV.text = matches.awayScore
-        if (matches.date != null) {
-            tanggalTV.text = formatDate(matches.date!!)
+        if (matches.dateEvent != null) {
+            tanggalTV.text = formatDate(matches.dateEvent!!)
         } else {
             tanggalTV.text = null
         }
