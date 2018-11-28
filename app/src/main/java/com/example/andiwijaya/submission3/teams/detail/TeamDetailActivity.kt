@@ -132,12 +132,10 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     private fun checkFavoriteStat() {
         if (isFavorite) {
-            Log.d("A", "0")
             removeFromFavorite()
         }
         else{
             addToFavorite()
-            Log.d("A", "1")
         }
 
         isFavorite = !isFavorite

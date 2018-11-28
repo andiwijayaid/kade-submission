@@ -13,8 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="confetti.json"
-            app:lottie_loop="true"/>
+            app:lottie_fileName="confetti.json"/>
 
     <ImageView
             android:src="@drawable/ic_soccer_ball"

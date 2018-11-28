@@ -24,7 +24,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainAdapter(private var matches: MutableList<Match>, private val context: Context?, private val listener: (Match) -> Unit) :
+class MainAdapter(private var matches: MutableList<Match>,
+                  private val context: Context?,
+                  private val listener: (Match) -> Unit,
+                  private val bellListener: (Match) -> Unit) :
     RecyclerView.Adapter<MatchViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MatchViewHolder {
@@ -40,23 +43,18 @@ class MainAdapter(private var matches: MutableList<Match>, private val context: 
     override fun getItemCount(): Int = matches.size
 
     override fun onBindViewHolder(p0: MatchViewHolder, p1: Int) {
-        p0.bindItem(matches[p1], listener)
+        p0.bindItem(matches[p1], listener, bellListener)
 
         p0.bellIB.setOnClickListener {
             val intent = Intent(Intent.ACTION_EDIT)
             intent.type = "vnd.android.cursor.item/event"
-            intent.putExtra(CalendarContract.Events.TITLE, matches[p1].fileName)
+            intent.putExtra(CalendarContract.Events.TITLE, matches[p1].eventName)
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, matches[p1].fileName)
+            intent.putExtra(CalendarContract.Events.HAS_ALARM, 1)
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, splitDateString(matches[p1].dateEvent!!, matches[p1].time!!))
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, splitDateString(matches[p1].dateEvent!!, matches[p1].time!!)+60*90*1000)
             intent.putExtra(CalendarContract.Events.ALL_DAY, false)
             context?.startActivity(intent)
-
-            Log.d("START", (splitDateString(matches[p1].dateEvent!!, matches[p1].time!!)-60*60*1000).toString())
-
-            Log.d("END", splitDateString(matches[p1].dateEvent!!, matches[p1].time!!).toString())
-            Log.d("ID", matches[p1].matchId)
-
-//            context?.startActivity(Intent(context, HomeActivity::class.java))
         }
     }
 
@@ -72,7 +70,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
     val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
-    fun bindItem(matches: Match, listener: (Match) -> Unit) {
+    fun bindItem(matches: Match, listener: (Match) -> Unit, bellListener: (Match) -> Unit) {
         homeNameTV.text = matches.homeTeam
         awayNameTV.text = matches.awayTeam
         homeScoreTV.text = matches.homeScore
@@ -85,6 +83,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         timeTV.text = formatTimeToGMT(matches.time!!)
 
         matchLL.onClick { listener(matches) }
+        bellIB.onClick { bellListener(matches) }
 
         // remove bell image button for last match
         if (matches.homeScore != null) {

@@ -79,6 +79,9 @@ data class Match(
     var fileName: String? = null,
 
     @SerializedName("idEvent")
-    var matchId: String? = null
+    var matchId: String? = null,
+
+    @SerializedName("strEvent")
+    var eventName: String? = null
 
 ) : Parcelable

@@ -1,6 +1,8 @@
 package com.example.andiwijaya.submission3.matches.nextmatch
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import com.example.andiwijaya.submission3.matches.MatchesView
 import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.gone
+import com.example.andiwijaya.submission3.util.splitDateString
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_next_match.*
@@ -55,12 +58,29 @@ class NextMatchFragment : Fragment(), MatchesView {
             android.R.color.holo_red_light
         )
 
-        adapter = MainAdapter(matches, context) {
-            context?.applicationContext?.startActivity<MatchDetailActivity>(
-                "FILE_NAME" to "${it.fileName}",
-                "ID" to "${it.matchId}"
-            )
-        }
+        adapter = MainAdapter(
+            matches,
+            context,
+            {
+                activity?.applicationContext?.startActivity<MatchDetailActivity>(
+                    "FILE_NAME" to "${it.fileName}",
+                    "ID" to "${it.matchId}"
+                )
+            },
+            {
+                val intent = Intent(Intent.ACTION_EDIT)
+                intent.type = "vnd.android.cursor.item/event"
+                intent.putExtra(CalendarContract.Events.TITLE, it.eventName)
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, it.fileName)
+                intent.putExtra(CalendarContract.Events.HAS_ALARM, 1)
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, splitDateString(it.dateEvent!!, it.time!!))
+                intent.putExtra(
+                    CalendarContract.EXTRA_EVENT_END_TIME,
+                    splitDateString(it.dateEvent!!, it.time!!) + 60 * 90 * 1000
+                )
+                intent.putExtra(CalendarContract.Events.ALL_DAY, false)
+                activity?.applicationContext?.startActivity(intent)
+            })
 
         view.nextMatchRV.layoutManager = LinearLayoutManager(context)
         view.nextMatchRV.adapter = adapter

@@ -11,25 +11,25 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".matches.detail.MatchDetailActivity">
-        </activity>
+        <activity android:name=".matches.detail.MatchDetailActivity"/>
         <activity
                 android:name=".splash.SplashScreenActivity"
-                android:theme="@style/AppTheme.Fullscreen">
+                android:theme="@style/AppTheme.Fullscreen"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".home.HomeActivity">
-        </activity>
-        <activity android:name=".searchview.SearchMatchActivity">
-        </activity>
-        <activity android:name=".teams.detail.TeamDetailActivity">
-        </activity>
-        <activity android:name=".teams.detail.players.detail.PlayerDetailActivity">
-        </activity>
+        <activity android:name=".home.HomeActivity"/>
+        <activity android:name=".searchview.SearchMatchActivity"/>
+        <activity
+                android:name=".teams.detail.TeamDetailActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".teams.detail.players.detail.PlayerDetailActivity"
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

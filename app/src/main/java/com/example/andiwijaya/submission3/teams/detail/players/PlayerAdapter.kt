@@ -41,7 +41,7 @@ class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val playerPosition = view.findViewById<TextView>(R.id.playerPositionTV)
 
     fun bindItem(players: Player, listener: (Player) -> Unit) {
-        if (players.playerImage != null) {
+        if (!players.playerImage.isNullOrEmpty()) {
             Picasso.get().load(players.playerImage).into(playerImage)
         }
         playerName.text = players.playerName

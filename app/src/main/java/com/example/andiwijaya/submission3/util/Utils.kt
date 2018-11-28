@@ -17,6 +17,7 @@ fun View.gone() {
     visibility = View.GONE
 }
 
+@SuppressLint("SimpleDateFormat")
 fun formatTimeToGMT(time: String): String {
 
     val df = SimpleDateFormat("HH:mm")

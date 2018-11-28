@@ -1,8 +1,12 @@
 package com.example.andiwijaya.submission3.matches.lastmatch
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,18 +21,20 @@ import com.example.andiwijaya.submission3.matches.MatchesView
 import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.gone
+import com.example.andiwijaya.submission3.util.splitDateString
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_last_match.*
 import kotlinx.android.synthetic.main.fragment_last_match.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.toast
 
 class LastMatchFragment : Fragment(), MatchesView {
 
     private lateinit var leagueName: String
-     var matches: MutableList<Match> = mutableListOf()
-     lateinit var adapter: MainAdapter
+    var matches: MutableList<Match> = mutableListOf()
+    lateinit var adapter: MainAdapter
 
     override fun showLoading() {
         view?.progressBar?.visible()
@@ -55,12 +61,29 @@ class LastMatchFragment : Fragment(), MatchesView {
             android.R.color.holo_red_light
         )
 
-        adapter = MainAdapter(matches, context) {
-            activity?.applicationContext?.startActivity<MatchDetailActivity>(
-                "FILE_NAME" to "${it.fileName}",
-                "ID" to "${it.matchId}"
-            )
-        }
+        adapter = MainAdapter(
+            matches,
+            context,
+            {
+                activity?.applicationContext?.startActivity<MatchDetailActivity>(
+                    "FILE_NAME" to "${it.fileName}",
+                    "ID" to "${it.matchId}"
+                )
+            },
+            {
+                val intent = Intent(Intent.ACTION_EDIT)
+                intent.type = "vnd.android.cursor.item/event"
+                intent.putExtra(CalendarContract.Events.TITLE, it.eventName)
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, it.fileName)
+                intent.putExtra(CalendarContract.Events.HAS_ALARM, 1)
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, splitDateString(it.dateEvent!!, it.time!!))
+                intent.putExtra(
+                    CalendarContract.EXTRA_EVENT_END_TIME,
+                    splitDateString(it.dateEvent!!, it.time!!) + 60 * 90 * 1000
+                )
+                intent.putExtra(CalendarContract.Events.ALL_DAY, false)
+                activity?.applicationContext?.startActivity(intent)
+            })
 
         view.lastMatchRV.adapter = adapter
         view.lastMatchRV.layoutManager = LinearLayoutManager(context)
@@ -78,7 +101,7 @@ class LastMatchFragment : Fragment(), MatchesView {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 leagueName = leagueSpinner.selectedItem.toString()
-                when(leagueName){
+                when (leagueName) {
                     "English Premier League" -> presenter.getPastMatchList("4328")
                     "English League Championship" -> presenter.getPastMatchList("4329")
                     "German Bundesliga" -> presenter.getPastMatchList("4331")

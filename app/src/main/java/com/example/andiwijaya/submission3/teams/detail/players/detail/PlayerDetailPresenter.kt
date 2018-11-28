@@ -39,7 +39,6 @@ class PlayerDetailPresenter(
                 TeamResponse::class.java
             )
 
-            Log.d("H", data.toString())
 
             view.showBadge(data.teams)
             view.hideLoading()

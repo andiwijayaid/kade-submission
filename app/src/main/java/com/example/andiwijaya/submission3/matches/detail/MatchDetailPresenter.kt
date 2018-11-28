@@ -41,8 +41,6 @@ class MatchDetailPresenter(
                 TeamResponse::class.java
             )
 
-            Log.d("H", data.toString())
-
             view.showHomeBadge(data.teams)
             view.hideLoading()
         }
@@ -57,8 +55,6 @@ class MatchDetailPresenter(
                     .doRequest(TheSportDBApi.getTeamByIdDetail(teamId)).await(),
                 TeamResponse::class.java
             )
-
-            Log.d("A", data.toString())
 
             view.showAwayBadge(data.teams)
             view.hideLoading()

@@ -21,7 +21,7 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
     }
 
     override fun showPlayerDetail(data: List<Player>) {
-        if (data[0].playerImage != null) {
+        if (!data[0].playerImage.isNullOrBlank()) {
             Picasso.get().load(data[0].playerImage).into(playerIV)
         } else {
             noPictTV.visible()

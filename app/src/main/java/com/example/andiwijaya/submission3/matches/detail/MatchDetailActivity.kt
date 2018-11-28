@@ -26,6 +26,7 @@ import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.toast
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showHomeBadge(data: List<Team>) {
@@ -35,7 +36,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     override fun showAwayBadge(data: List<Team>) {
         Picasso.get().load(data[0].teamBadge).into(awayBadgeIV)
-
     }
 
     private lateinit var presenter: MatchDetailPresenter
@@ -89,64 +89,53 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     override fun hideLoading() {
         detailLL.visible()
-        progressBar.gone()
+        progressBar.invisible()
     }
 
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun showMatchDetail(data: List<Match>) {
-        match = Match(
-            data[0].dateEvent,
-            data[0].time,
-            data[0].homeTeam,
-            data[0].homeTeamId,
-            data[0].awayTeam,
-            data[0].awayTeamId,
-            data[0].homeScore,
-            data[0].awayScore,
-            data[0].homeGoalDetails,
-            data[0].awayGoalDetails,
-            data[0].homeShots,
-            data[0].awayShots,
-            data[0].homeLineupGoalkeeper,
-            data[0].homeLineupDefense,
-            data[0].homeLineupMidfield,
-            data[0].homeLineupForward,
-            data[0].homeLineupSubstitutes,
-            data[0].awayLineupGoalkeeper,
-            data[0].awayLineupDefense,
-            data[0].awayLineupMidfield,
-            data[0].awayLineupForward,
-            data[0].awayLineupSubstitutes,
-            data[0].fileName,
-            data[0].matchId
-        )
 
-        if (data[0].homeGoalDetails == null) {
-            noDataTV.visible()
-            detailSV.invisible()
-            progressBar.gone()
-        }
+        match = Match(
+            matchId = data[0].matchId,
+            fileName = data[0].fileName,
+            dateEvent = data[0].dateEvent,
+            homeTeam = data[0].homeTeam,
+            awayTeam = data[0].awayTeam,
+            homeScore = data[0].homeScore,
+            awayScore = data[0].awayScore
+        )
 
         swipeRefreshLayout.isRefreshing = false
 
-        data[0].homeGoalDetails = replaceSemicolonWithNewRow(match.homeGoalDetails!!)
-        data[0].awayGoalDetails = replaceSemicolonWithNewRow(match.awayGoalDetails!!)
-
-        data[0].homeLineupDefense = replaceSemicolonWithNewRow(match.homeLineupDefense!!)
-        data[0].awayLineupDefense = replaceSemicolonWithNewRow(match.awayLineupDefense!!)
-
-        data[0].homeLineupMidfield = replaceSemicolonWithNewRow(match.homeLineupMidfield!!)
-        data[0].awayLineupMidfield = replaceSemicolonWithNewRow(match.awayLineupMidfield!!)
-
-        data[0].homeLineupForward = replaceSemicolonWithNewRow(match.homeLineupForward!!)
-        data[0].awayLineupForward = replaceSemicolonWithNewRow(match.awayLineupForward!!)
-
-        data[0].homeLineupSubstitutes = replaceSemicolonWithNewRow(match.homeLineupSubstitutes!!)
-        data[0].awayLineupSubstitutes = replaceSemicolonWithNewRow(match.awayLineupSubstitutes!!)
+        presenter.getHomeBadge(data[0].homeTeamId!!)
+        presenter.getAwayBadge(data[0].awayTeamId!!)
 
         homeNameTV.text = data[0].homeTeam
         awayNameTV.text = data[0].awayTeam
+
+        dateTV.text = formatDate(data[0].dateEvent!!)
+        timeTV.text = formatTimeToGMT(data[0].time!!)
+
+        if (data[0].homeScore.isNullOrBlank()) {
+            noDataTV.visible()
+            detailSV.invisible()
+        }
+
+        data[0].homeGoalDetails = replaceSemicolonWithNewRow(data[0].homeGoalDetails!!)
+        data[0].awayGoalDetails = replaceSemicolonWithNewRow(data[0].awayGoalDetails!!)
+
+        data[0].homeLineupDefense = replaceSemicolonWithNewRow(data[0].homeLineupDefense!!)
+        data[0].awayLineupDefense = replaceSemicolonWithNewRow(data[0].awayLineupDefense!!)
+
+        data[0].homeLineupMidfield = replaceSemicolonWithNewRow(data[0].homeLineupMidfield!!)
+        data[0].awayLineupMidfield = replaceSemicolonWithNewRow(data[0].awayLineupMidfield!!)
+
+        data[0].homeLineupForward = replaceSemicolonWithNewRow(data[0].homeLineupForward!!)
+        data[0].awayLineupForward = replaceSemicolonWithNewRow(data[0].awayLineupForward!!)
+
+        data[0].homeLineupSubstitutes = replaceSemicolonWithNewRow(data[0].homeLineupSubstitutes!!)
+        data[0].awayLineupSubstitutes = replaceSemicolonWithNewRow(data[0].awayLineupSubstitutes!!)
 
         homeScoreTV.text = data[0].homeScore
         awayScoreTV.text = data[0].awayScore
@@ -171,12 +160,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         homeSubsTV.text = data[0].homeLineupSubstitutes
         awaySubsTV.text = data[0].awayLineupSubstitutes
-
-        dateTV.text = formatDate(data[0].dateEvent!!)
-        timeTV.text = formatTimeToGMT(data[0].time!!)
-
-        presenter.getHomeBadge(data[0].homeTeamId!!)
-        presenter.getAwayBadge(data[0].awayTeamId!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
