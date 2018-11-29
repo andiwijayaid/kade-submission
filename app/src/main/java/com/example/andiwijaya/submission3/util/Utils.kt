@@ -1,9 +1,14 @@
 package com.example.andiwijaya.submission3.util
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.View
 import java.text.SimpleDateFormat
 import java.util.*
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.support.v4.app.FragmentActivity
+
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -61,4 +66,13 @@ fun splitDateString(date: String, time: String): Long {
     val dateMillis = mDate.timeInMillis
 
     return dateMillis
+}
+
+@SuppressLint("ServiceCast")
+fun checkInternetConnection(activity: FragmentActivity?) : Boolean {
+    val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return if (connectivityManager is ConnectivityManager) {
+        val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+        networkInfo?.isConnected ?: false
+    } else false
 }

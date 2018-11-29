@@ -13,15 +13,17 @@ import com.example.andiwijaya.submission3.R.array.league
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailActivity
+import com.example.andiwijaya.submission3.util.checkInternetConnection
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_teams.*
 import kotlinx.android.synthetic.main.fragment_teams.view.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
-
+import org.jetbrains.anko.support.v4.toast
 
 class TeamsFragment : Fragment(), TeamsView {
 
@@ -39,6 +41,17 @@ class TeamsFragment : Fragment(), TeamsView {
         view?.progressBar?.invisible()
     }
 
+    override fun getDataFromAPI() {
+        if (checkInternetConnection(activity)) {
+            presenter.getTeamList(leagueName)
+        } else {
+            progressBar.gone()
+            refreshBT.visible()
+            swipeRefreshLayout.isRefreshing = false
+            team_fragment.snackbar(R.string.no_internet_connection)
+        }
+    }
+
     override fun showListTeam(data: List<Team>) {
         swipeRefreshLayout?.isRefreshing = false
         teams.clear()
@@ -51,6 +64,11 @@ class TeamsFragment : Fragment(), TeamsView {
 
         setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(view.toolbar)
+
+        view.refreshBT.setOnClickListener {
+            getDataFromAPI()
+            toast("a")
+        }
 
         view.swipeRefreshLayout?.setColorSchemeResources(
             R.color.colorAccent,
@@ -79,7 +97,7 @@ class TeamsFragment : Fragment(), TeamsView {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 leagueName = leagueSpinner.selectedItem.toString()
-                presenter.getTeamList(leagueName)
+                getDataFromAPI()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -87,8 +105,9 @@ class TeamsFragment : Fragment(), TeamsView {
         }
 
         view.swipeRefreshLayout.onRefresh {
-            presenter.getTeamList(leagueName)
+            getDataFromAPI()
         }
+
 
         return view
     }
@@ -119,7 +138,7 @@ class TeamsFragment : Fragment(), TeamsView {
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-                presenter.getTeamList(leagueName)
+                getDataFromAPI()
                 spinnerLL.visible()
                 return true
             }

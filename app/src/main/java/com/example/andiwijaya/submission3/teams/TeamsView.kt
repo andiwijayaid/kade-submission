@@ -6,6 +6,7 @@ interface TeamsView {
 
     fun showLoading()
     fun hideLoading()
+    fun getDataFromAPI()
     fun showListTeam(data: List<Team>)
 
 }

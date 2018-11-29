@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.FavoriteMatch
+import com.example.andiwijaya.submission3.util.gone
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class FavoriteMatchesAdapter(private val favoriteMatch: List<FavoriteMatch>, private val listener: (FavoriteMatch) -> Unit) :
@@ -39,6 +41,7 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
     val tanggalTV: TextView = view.findViewById(R.id.dateTV)
     val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
+    val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
     fun bindItem(favorites: FavoriteMatch, listener: (FavoriteMatch) -> Unit) {
         homeNameTV.text = favorites.homeName
@@ -48,5 +51,8 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         tanggalTV.text = favorites.matchDate
 
         matchLL.onClick { listener(favorites) }
+
+        // Remove bell icon on favorite match item
+        bellIB.gone()
     }
 }
