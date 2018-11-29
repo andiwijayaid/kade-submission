@@ -11,23 +11,21 @@ import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
-import com.example.andiwijaya.submission3.home.HomeActivity
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.formatDate
 import com.example.andiwijaya.submission3.util.formatTimeToGMT
 import com.example.andiwijaya.submission3.util.gone
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
-import com.example.andiwijaya.submission3.util.splitDateString
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.andiwijaya.submission3.util.convertToMillis
 
 
-class MainAdapter(private var matches: MutableList<Match>,
-                  private val context: Context?,
-                  private val listener: (Match) -> Unit,
-                  private val bellListener: (Match) -> Unit) :
+class MainAdapter(
+    private var matches: MutableList<Match>,
+    private val context: Context?,
+    private val listener: (Match) -> Unit,
+    private val bellListener: (Match) -> Unit
+) :
     RecyclerView.Adapter<MatchViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MatchViewHolder {
@@ -51,8 +49,14 @@ class MainAdapter(private var matches: MutableList<Match>,
             intent.putExtra(CalendarContract.Events.TITLE, matches[p1].eventName)
             intent.putExtra(CalendarContract.Events.DESCRIPTION, matches[p1].fileName)
             intent.putExtra(CalendarContract.Events.HAS_ALARM, 1)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, splitDateString(matches[p1].dateEvent!!, matches[p1].time!!))
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, splitDateString(matches[p1].dateEvent!!, matches[p1].time!!)+60*90*1000)
+            intent.putExtra(
+                CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                convertToMillis(matches[p1].dateEvent!!, matches[p1].time!!)
+            )
+            intent.putExtra(
+                CalendarContract.EXTRA_EVENT_END_TIME,
+                convertToMillis(matches[p1].dateEvent!!, matches[p1].time!!) + 60 * 90 * 1000
+            )
             intent.putExtra(CalendarContract.Events.ALL_DAY, false)
             context?.startActivity(intent)
         }
@@ -71,16 +75,22 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit, bellListener: (Match) -> Unit) {
-        homeNameTV.text = matches.homeTeam
-        awayNameTV.text = matches.awayTeam
         homeScoreTV.text = matches.homeScore
         awayScoreTV.text = matches.awayScore
+        homeNameTV.text = matches.homeTeam
+        awayNameTV.text = matches.awayTeam
+
         if (matches.dateEvent != null) {
             tanggalTV.text = formatDate(matches.dateEvent!!)
         } else {
             tanggalTV.text = null
         }
-        timeTV.text = formatTimeToGMT(matches.time!!)
+
+        if (matches.time != null) {
+            timeTV.text = formatTimeToGMT(matches.time.toString())
+        } else {
+            timeTV.text = null
+        }
 
         matchLL.onClick { listener(matches) }
         bellIB.onClick { bellListener(matches) }

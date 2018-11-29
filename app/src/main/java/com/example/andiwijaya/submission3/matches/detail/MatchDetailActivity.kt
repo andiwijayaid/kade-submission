@@ -117,31 +117,13 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         dateTV.text = formatDate(data[0].dateEvent!!)
         timeTV.text = formatTimeToGMT(data[0].time!!)
 
+        homeScoreTV.text = data[0].homeScore
+        awayScoreTV.text = data[0].awayScore
+
         if (data[0].homeScore.isNullOrBlank()) {
             noDataTV.visible()
             detailSV.invisible()
         }
-
-        data[0].homeGoalDetails = replaceSemicolonWithNewRow(data[0].homeGoalDetails!!)
-        data[0].awayGoalDetails = replaceSemicolonWithNewRow(data[0].awayGoalDetails!!)
-
-        data[0].homeLineupDefense = replaceSemicolonWithNewRow(data[0].homeLineupDefense!!)
-        data[0].awayLineupDefense = replaceSemicolonWithNewRow(data[0].awayLineupDefense!!)
-
-        data[0].homeLineupMidfield = replaceSemicolonWithNewRow(data[0].homeLineupMidfield!!)
-        data[0].awayLineupMidfield = replaceSemicolonWithNewRow(data[0].awayLineupMidfield!!)
-
-        data[0].homeLineupForward = replaceSemicolonWithNewRow(data[0].homeLineupForward!!)
-        data[0].awayLineupForward = replaceSemicolonWithNewRow(data[0].awayLineupForward!!)
-
-        data[0].homeLineupSubstitutes = replaceSemicolonWithNewRow(data[0].homeLineupSubstitutes!!)
-        data[0].awayLineupSubstitutes = replaceSemicolonWithNewRow(data[0].awayLineupSubstitutes!!)
-
-        homeScoreTV.text = data[0].homeScore
-        awayScoreTV.text = data[0].awayScore
-
-        homeGoalDetailTV.text = data[0].homeGoalDetails
-        awayGoalDetailTV.text = data[0].awayGoalDetails
 
         homeShotTV.text = data[0].homeShots
         awayShotTV.text = data[0].awayShots
@@ -149,17 +131,31 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         homeGKTV.text = data[0].homeLineupGoalkeeper
         awayGKTV.text = data[0].awayLineupGoalkeeper
 
+        data[0].homeGoalDetails = replaceSemicolonWithNewRow(data[0].homeGoalDetails!!)
+        data[0].awayGoalDetails = replaceSemicolonWithNewRow(data[0].awayGoalDetails!!)
+        homeGoalDetailTV.text = data[0].homeGoalDetails
+        awayGoalDetailTV.text = data[0].awayGoalDetails
+
+        data[0].homeLineupDefense = replaceSemicolonWithNewRow(data[0].homeLineupDefense!!)
+        data[0].awayLineupDefense = replaceSemicolonWithNewRow(data[0].awayLineupDefense!!)
         homeDefenseTV.text = data[0].homeLineupDefense
         awayDefenseTV.text = data[0].awayLineupDefense
 
+        data[0].homeLineupMidfield = replaceSemicolonWithNewRow(data[0].homeLineupMidfield!!)
+        data[0].awayLineupMidfield = replaceSemicolonWithNewRow(data[0].awayLineupMidfield!!)
         homeMidfieldTV.text = data[0].homeLineupMidfield
         awayMidfieldTV.text = data[0].awayLineupMidfield
 
+        data[0].homeLineupForward = replaceSemicolonWithNewRow(data[0].homeLineupForward!!)
+        data[0].awayLineupForward = replaceSemicolonWithNewRow(data[0].awayLineupForward!!)
         homeForwardTV.text = data[0].homeLineupForward
         awayForwardTV.text = data[0].awayLineupForward
 
+        data[0].homeLineupSubstitutes = replaceSemicolonWithNewRow(data[0].homeLineupSubstitutes!!)
+        data[0].awayLineupSubstitutes = replaceSemicolonWithNewRow(data[0].awayLineupSubstitutes!!)
         homeSubsTV.text = data[0].homeLineupSubstitutes
         awaySubsTV.text = data[0].awayLineupSubstitutes
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -208,10 +204,14 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     FavoriteMatch.AWAY_SCORE to match.awayScore
                 )
             }
-            detailRL.snackbar("Ditambahkan ke favorite", "undo") {
-                checkFavoriteStat()
-                removeFromFavorite()
-            }
+            detailRL.snackbar(
+                R.string.added_to_favorite,
+                R.string.undo,
+                {
+                    checkFavoriteStat()
+                    removeFromFavorite()
+                }
+            )
         } catch (e: SQLiteConstraintException) {
             Log.d("e", e.toString())
         }
@@ -225,10 +225,14 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     "id" to id
                 )
             }
-            detailRL.snackbar("Dihapus dari favorite", "undo") {
-                checkFavoriteStat()
-                addToFavorite()
-            }
+            detailRL.snackbar(
+                R.string.deleted_from_favorite,
+                R.string.undo,
+                {
+                    checkFavoriteStat()
+                    addToFavorite()
+                }
+            )
         } catch (e: SQLiteConstraintException) {
         }
     }

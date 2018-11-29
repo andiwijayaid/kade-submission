@@ -27,7 +27,9 @@ class MatchesPresenter(
                 MatchResponse::class.java
             )
 
-            view.showListMatch(data.events)
+            if (!data.events.isNullOrEmpty()) {
+                view.showListMatch(data.events)
+            }
             view.hideLoading()
         }
     }
@@ -42,7 +44,9 @@ class MatchesPresenter(
                 MatchResponse::class.java
             )
 
-            view.showListMatch(data.events)
+            if (!data.events.isNullOrEmpty()) {
+                view.showListMatch(data.events)
+            }
             view.hideLoading()
         }
     }

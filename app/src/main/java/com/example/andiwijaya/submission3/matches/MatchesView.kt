@@ -6,6 +6,7 @@ interface MatchesView {
 
     fun showLoading()
     fun hideLoading()
+    fun getDataFromAPI()
     fun showListMatch(data: List<Match>)
 
 }

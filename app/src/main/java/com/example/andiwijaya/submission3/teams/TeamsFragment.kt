@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_teams.view.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.toast
 
 class TeamsFragment : Fragment(), TeamsView {
 
@@ -46,9 +45,14 @@ class TeamsFragment : Fragment(), TeamsView {
             presenter.getTeamList(leagueName)
         } else {
             progressBar.gone()
-            refreshBT.visible()
             swipeRefreshLayout.isRefreshing = false
-            team_fragment.snackbar(R.string.no_internet_connection)
+            team_fragment.snackbar(
+                R.string.check_connection,
+                R.string.refresh,
+                {
+                    getDataFromAPI()
+                }
+            ).setDuration(10000).show()
         }
     }
 
@@ -64,11 +68,6 @@ class TeamsFragment : Fragment(), TeamsView {
 
         setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(view.toolbar)
-
-        view.refreshBT.setOnClickListener {
-            getDataFromAPI()
-            toast("a")
-        }
 
         view.swipeRefreshLayout?.setColorSchemeResources(
             R.color.colorAccent,
@@ -108,7 +107,6 @@ class TeamsFragment : Fragment(), TeamsView {
             getDataFromAPI()
         }
 
-
         return view
     }
 
@@ -119,19 +117,23 @@ class TeamsFragment : Fragment(), TeamsView {
         val item = menu?.findItem(R.id.search)
         val searchView = item?.actionView as SearchView?
 
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 teams.clear()
-                presenter.getTeamByNameList(p0!!)
+                if (checkInternetConnection(activity)) {
+                    presenter.getTeamByNameList(p0!!)
+                } else {
+                    team_fragment.snackbar(R.string.check_connection)
+                }
                 return false
             }
         })
 
-        item?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+        item?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
                 spinnerLL.gone()
                 return true

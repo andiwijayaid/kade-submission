@@ -10,6 +10,7 @@ import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailPresenter
 import com.example.andiwijaya.submission3.teams.detail.TeamDetailView
+import com.example.andiwijaya.submission3.util.checkInternetConnection
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_team_overview.*
 class OverviewFragment : Fragment(), TeamDetailView {
 
     private lateinit var presenter: TeamDetailPresenter
+    private lateinit var teamId: String
 
     override fun showLoading() {
         view?.progressBar?.visible()
@@ -26,6 +28,14 @@ class OverviewFragment : Fragment(), TeamDetailView {
 
     override fun hideLoading() {
         view?.progressBar?.gone()
+    }
+
+    override fun getDataFromAPI() {
+        if (checkInternetConnection(activity)) {
+            presenter.getTeamDetail(teamId)
+        } else {
+            progressBar?.gone()
+        }
     }
 
     override fun showTeamDetail(data: List<Team>) {
@@ -42,12 +52,12 @@ class OverviewFragment : Fragment(), TeamDetailView {
             android.R.color.holo_red_light
         )
 
-        val ID = activity?.intent?.getStringExtra("ID")
+        teamId = activity?.intent?.getStringExtra("ID").toString()
 
         val request = ApiRepository()
         val gson = Gson()
         presenter = TeamDetailPresenter(this, request, gson)
-        presenter.getTeamDetail(ID!!)
+        getDataFromAPI()
 
         return view
     }

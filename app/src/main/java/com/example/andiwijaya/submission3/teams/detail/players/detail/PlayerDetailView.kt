@@ -7,6 +7,8 @@ interface PlayerDetailView {
 
     fun showLoading()
     fun hideLoading()
+    fun getPlayerDetailFromAPI()
+    fun getBadgeFromAPI()
     fun showPlayerDetail(data: List<Player>)
     fun showBadge(data: List<Team>)
 }

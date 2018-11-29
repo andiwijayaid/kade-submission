@@ -148,6 +148,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    app:title="@string/player"
                     app:navigationIcon="?attr/homeAsUpIndicator"
                     app:layout_collapseMode="pin"/>
 

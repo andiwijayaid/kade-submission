@@ -7,14 +7,32 @@ import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Player
 import com.example.andiwijaya.submission3.model.Team
+import com.example.andiwijaya.submission3.util.checkInternetConnection
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_player_detail.*
+import org.jetbrains.anko.toast
 
 class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
     override fun showLoading() {
+    }
+
+    override fun getPlayerDetailFromAPI() {
+        if (checkInternetConnection(this)) {
+            presenter.getPlayerDetail(playerId)
+        } else {
+            toast(R.string.check_connection)
+        }
+    }
+
+    override fun getBadgeFromAPI() {
+        if (checkInternetConnection(this)) {
+            presenter.getBadge(teamId)
+        } else {
+            toast(R.string.check_connection)
+        }
     }
 
     override fun hideLoading() {
@@ -48,9 +66,8 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
 
     private lateinit var teamId: String
     private lateinit var playerId: String
-    private lateinit var playerName: String
+    private var playerName: String? = null
     private lateinit var presenter: PlayerDetailPresenter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_detail)
@@ -89,7 +106,7 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
         val gson = Gson()
         presenter = PlayerDetailPresenter(this, request, gson)
         presenter.getPlayerDetail(playerId)
-        presenter.getHomeBadge(teamId)
+        presenter.getBadge(teamId)
 
     }
 }

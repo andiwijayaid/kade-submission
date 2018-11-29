@@ -8,10 +8,11 @@ import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class PlayerPresenter(private val view: PlayerView,
-                      private val apiRepository: ApiRepository,
-                      private val gson: Gson,
-                      private val contextPool: CoroutineContextProvider = CoroutineContextProvider()
+class PlayerPresenter(
+    private val view: PlayerView,
+    private val apiRepository: ApiRepository,
+    private val gson: Gson,
+    private val contextPool: CoroutineContextProvider = CoroutineContextProvider()
 ) {
 
     fun getPlayers(teamId: String) {

@@ -16,6 +16,7 @@ import com.example.andiwijaya.submission3.model.FavoriteTeam
 import com.example.andiwijaya.submission3.model.Team
 import com.example.andiwijaya.submission3.teams.detail.overview.OverviewFragment
 import com.example.andiwijaya.submission3.teams.detail.players.PlayersFragment
+import com.example.andiwijaya.submission3.util.checkInternetConnection
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_team_detail.*
@@ -24,6 +25,7 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.toast
 
 
 class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
@@ -31,7 +33,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private lateinit var presenter: TeamDetailPresenter
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
-    private lateinit var teamName: String
+    private var teamName: String? = null
     private lateinit var teamId: String
 
     private lateinit var team: Team
@@ -51,7 +53,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = TeamDetailPresenter(this, request, gson)
-        presenter.getTeamDetail(teamId)
+        getDataFromAPI()
 
         val mAdapter = FavoritesViewPagerAdapter(supportFragmentManager)
         mAdapter.addFragment(OverviewFragment(), "overview")
@@ -96,11 +98,21 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     override fun hideLoading() {}
 
+    override fun getDataFromAPI() {
+        if (checkInternetConnection(this)) {
+            presenter.getTeamDetail(teamId)
+        } else {
+
+            toast(R.string.check_connection)
+        }
+    }
+
     override fun showTeamDetail(data: List<Team>) {
         team = Team(
             data[0].teamId,
             data[0].teamName,
-            data[0].teamBadge)
+            data[0].teamBadge
+        )
         Picasso.get().load(data[0].teamDetailBackground).into(teamBackgroundIV)
         Picasso.get().load(data[0].teamBadge).into(team_badge)
         team_name.text = data[0].teamName
@@ -133,8 +145,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private fun checkFavoriteStat() {
         if (isFavorite) {
             removeFromFavorite()
-        }
-        else{
+        } else {
             addToFavorite()
         }
 
@@ -152,10 +163,14 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                     FavoriteTeam.TEAM_BADGE to team.teamBadge
                 )
             }
-            coordinator.snackbar("Ditambahkan ke favorite", "undo") {
-                checkFavoriteStat()
-                removeFromFavorite()
-            }
+            coordinator.snackbar(
+                R.string.added_to_favorite,
+                R.string.undo,
+                {
+                    checkFavoriteStat()
+                    removeFromFavorite()
+                }
+            )
         } catch (e: SQLiteConstraintException) {
             Log.d("e", e.toString())
         }
@@ -169,10 +184,14 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                     "id" to teamId
                 )
             }
-            coordinator.snackbar("Dihapus dari favorite", "undo") {
-                checkFavoriteStat()
-                addToFavorite()
-            }
+            coordinator.snackbar(
+                R.string.deleted_from_favorite,
+                R.string.undo,
+                {
+                    checkFavoriteStat()
+                    addToFavorite()
+                }
+            )
         } catch (e: SQLiteConstraintException) {
         }
     }

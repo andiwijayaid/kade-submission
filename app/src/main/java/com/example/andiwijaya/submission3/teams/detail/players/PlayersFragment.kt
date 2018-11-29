@@ -10,17 +10,19 @@ import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.model.Player
 import com.example.andiwijaya.submission3.teams.detail.players.detail.PlayerDetailActivity
+import com.example.andiwijaya.submission3.util.checkInternetConnection
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_team_overview.*
 import kotlinx.android.synthetic.main.fragment_team_players.view.*
 import org.jetbrains.anko.startActivity
 
 class PlayersFragment : Fragment(), PlayerView {
 
     private lateinit var presenter: PlayerPresenter
-
     private var players: MutableList<Player> = mutableListOf()
+    private lateinit var teamId: String
     private lateinit var adapter: PlayerAdapter
 
     override fun showLoading() {
@@ -29,6 +31,12 @@ class PlayersFragment : Fragment(), PlayerView {
 
     override fun hideLoading() {
         view?.progressBar?.gone()
+    }
+
+    override fun getDataFromAPI() {
+        if (checkInternetConnection(activity)) {
+            presenter.getPlayers(teamId)
+        }
     }
 
     override fun showPlayerDetail(data: List<Player>) {
@@ -40,7 +48,7 @@ class PlayersFragment : Fragment(), PlayerView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_team_players, container, false)
-        val TEAM_ID = activity?.intent?.getStringExtra("ID")
+        teamId = activity?.intent?.getStringExtra("ID").toString()
 
         adapter = PlayerAdapter(players) {
             context?.applicationContext?.startActivity<PlayerDetailActivity>(
@@ -55,7 +63,7 @@ class PlayersFragment : Fragment(), PlayerView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = PlayerPresenter(this, request, gson)
-        presenter.getPlayers(TEAM_ID!!)
+        getDataFromAPI()
 
         return view
     }

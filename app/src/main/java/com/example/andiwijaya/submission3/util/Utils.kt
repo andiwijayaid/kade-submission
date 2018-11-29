@@ -8,6 +8,7 @@ import java.util.*
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.support.v4.app.FragmentActivity
+import android.util.Log
 
 
 fun View.visible() {
@@ -50,16 +51,17 @@ fun replaceSemicolonWithNewRow(string: String): String {
     return string.replace(";", "\n")
 }
 
-fun splitDateString(date: String, time: String): Long {
+fun convertToMillis(date: String, time: String): Long {
     val dateList = date.split("-")
-    val timeList = time.split(":")
+    val timeInGMT = formatTimeToGMT(time)
+    val timeList = timeInGMT.split(":")
 
     val mDate = Calendar.getInstance()
     mDate.set(
         dateList[0].toInt(),
         dateList[1].toInt() - 1,
         dateList[2].toInt(),
-        timeList[0].toInt()-1,
+        timeList[0].toInt(),
         timeList[1].toInt()
     )
 
