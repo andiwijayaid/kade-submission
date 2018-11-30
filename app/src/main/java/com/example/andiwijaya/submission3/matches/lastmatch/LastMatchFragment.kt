@@ -19,8 +19,8 @@ import com.example.andiwijaya.submission3.matches.MatchesView
 import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.checkInternetConnection
-import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.convertToMillis
+import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_last_match.*
@@ -120,12 +120,12 @@ class LastMatchFragment : Fragment(), MatchesView {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 leagueName = leagueSpinner.selectedItem.toString()
                 when (leagueName) {
-                    "English Premier League" -> leagueId= "4328"
-                    "English League Championship" -> leagueId= "4329"
-                    "German Bundesliga" -> leagueId= "4331"
-                    "Italian Serie A" -> leagueId= "4332"
-                    "French Ligue 1" -> leagueId= "4334"
-                    "Spanish La Liga" -> leagueId= "4335"
+                    "English Premier League" -> leagueId = "4328"
+                    "English League Championship" -> leagueId = "4329"
+                    "German Bundesliga" -> leagueId = "4331"
+                    "Italian Serie A" -> leagueId = "4332"
+                    "French Ligue 1" -> leagueId = "4334"
+                    "Spanish La Liga" -> leagueId = "4335"
                 }
                 getDataFromAPI()
             }

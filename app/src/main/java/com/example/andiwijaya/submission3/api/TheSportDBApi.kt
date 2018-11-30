@@ -29,7 +29,7 @@ object TheSportDBApi {
             .toString()
     }
 
-    fun getEvent(query: String) : String {
+    fun getEvent(query: String): String {
         return Uri.parse(BuildConfig.BASE_URL).buildUpon()
             .appendPath("api")
             .appendPath("v1")

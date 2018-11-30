@@ -1,6 +1,5 @@
 package com.example.andiwijaya.submission3.matches.detail
 
-import android.util.Log
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.api.TheSportDBApi
 import com.example.andiwijaya.submission3.model.MatchDetailResponse

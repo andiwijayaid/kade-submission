@@ -43,6 +43,7 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
             Picasso.get().load(data[0].playerImage).into(playerIV)
         } else {
             noPictTV.visible()
+            playerIV.gone()
         }
 
         playerName = data[0].playerName.toString()
@@ -105,8 +106,8 @@ class PlayerDetailActivity : AppCompatActivity(), PlayerDetailView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = PlayerDetailPresenter(this, request, gson)
-        presenter.getPlayerDetail(playerId)
-        presenter.getBadge(teamId)
+        getPlayerDetailFromAPI()
+        getBadgeFromAPI()
 
     }
 }

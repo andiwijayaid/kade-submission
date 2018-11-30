@@ -41,7 +41,8 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    MatchesFragment(), MatchesFragment::class.java.simpleName)
+                    MatchesFragment(), MatchesFragment::class.java.simpleName
+                )
                 .commit()
         }
     }
@@ -52,7 +53,8 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    TeamsFragment(), TeamsFragment::class.java.simpleName)
+                    TeamsFragment(), TeamsFragment::class.java.simpleName
+                )
                 .commit()
         }
     }

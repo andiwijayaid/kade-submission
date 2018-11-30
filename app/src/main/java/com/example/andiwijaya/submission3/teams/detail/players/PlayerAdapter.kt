@@ -43,7 +43,10 @@ class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bindItem(players: Player, listener: (Player) -> Unit) {
         if (!players.playerImage.isNullOrEmpty()) {
             Picasso.get().load(players.playerImage).into(playerImage)
+        } else {
+            playerImage.setImageResource(R.drawable.ic_no_pic)
         }
+
         playerName.text = players.playerName
         playerPosition.text = players.playerPosition
 

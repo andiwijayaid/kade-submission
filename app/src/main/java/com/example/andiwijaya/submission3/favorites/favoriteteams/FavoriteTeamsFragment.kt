@@ -17,7 +17,7 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
 
-class FavoriteTeamsFragment: Fragment() {
+class FavoriteTeamsFragment : Fragment() {
 
     private var favoriteTeams: MutableList<FavoriteTeam> = mutableListOf()
     private lateinit var adapter: FavoriteTeamsAdapter

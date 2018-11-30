@@ -10,10 +10,8 @@ import com.example.andiwijaya.submission3.model.TeamResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations

@@ -12,7 +12,10 @@ import com.example.andiwijaya.submission3.model.FavoriteMatch
 import com.example.andiwijaya.submission3.util.gone
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class FavoriteMatchesAdapter(private val favoriteMatch: List<FavoriteMatch>, private val listener: (FavoriteMatch) -> Unit) :
+class FavoriteMatchesAdapter(
+    private val favoriteMatch: List<FavoriteMatch>,
+    private val listener: (FavoriteMatch) -> Unit
+) :
     RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {

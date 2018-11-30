@@ -1,32 +1,26 @@
 package com.example.andiwijaya.submission3.home
 
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.Espresso.pressBack
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
-import android.widget.ImageButton
 import com.example.andiwijaya.submission3.CustomAssertions
-import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
-import kotlinx.android.synthetic.main.activity_search_match.*
-import kotlinx.coroutines.delay
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+
 @RunWith(AndroidJUnit4::class)
 class HomeActivityTest {
     @Rule
-    @JvmField var activityRule = ActivityTestRule(HomeActivity::class.java)
+    @JvmField
+    var activityRule = ActivityTestRule(HomeActivity::class.java)
 
     @Test
     fun testMatchFavoritesFeature() {
@@ -39,8 +33,10 @@ class HomeActivityTest {
         Thread.sleep(500)
         onView(withId(lastMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
         onView(withId(lastMatchRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click())
+        )
 
+        Thread.sleep(1000)
         // Add to favorite
         onView(withId(add_to_favorite)).perform(click())
 
@@ -58,7 +54,8 @@ class HomeActivityTest {
 
         // back to match detail from a match in favorite
         onView(withId(favoriteMatchRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
+        )
 
         // Removing favorite
         onView(withId(add_to_favorite)).perform(click())
@@ -87,8 +84,10 @@ class HomeActivityTest {
         Thread.sleep(1000)
         onView(withId(teamsRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
         onView(withId(teamsRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(10, click())
+        )
 
+        Thread.sleep(1000)
         // Add to favorite
         onView(withId(add_to_favorite)).perform(click())
 
@@ -108,7 +107,8 @@ class HomeActivityTest {
 
         // back to team detail from a match in favorite
         onView(withId(favoriteTeamRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
+        )
 
         // Removing favorite
         onView(withId(add_to_favorite)).perform(click())
@@ -138,7 +138,8 @@ class HomeActivityTest {
         Thread.sleep(1000)
         onView(withId(teamsRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(13))
         onView(withId(teamsRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(13, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(13, click())
+        )
 
         Thread.sleep(1000)
         onView(withText("PLAYERS")).perform(click())
@@ -147,7 +148,8 @@ class HomeActivityTest {
 
         onView(withId(playersRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(2))
         onView(withId(playersRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click())
+        )
 
         Thread.sleep(500)
         pressBack()
@@ -165,7 +167,8 @@ class HomeActivityTest {
         onView(withId(teamsRV)).check(matches(isDisplayed()))
         onView(withId(teamsRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
         onView(withId(teamsRV)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click())
+        )
         Thread.sleep(500)
         onView(withText("PLAYERS")).perform(click())
         Thread.sleep(500)
@@ -184,18 +187,16 @@ class HomeActivityTest {
         Thread.sleep(3000)
     }
 
-
-
-    @Test
-    fun addToCalendar() {
-        onView(withId(matchesIC)).perform(click())
-        onView(withText("NEXT MATCH")).perform(click())
-
-        onView(withId(nextMatchRV)).check(matches(isDisplayed()))
-
-        Thread.sleep(3000)
-        onView(withId(nextMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(7))
-        onView(withId(nextMatchRV)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(7, MyViewAction.clickChildViewWithId(
-            bellIB)), closeSoftKeyboard())
-    }
+//    @Test
+//    fun calendarIntentTest() {
+//        onView(withId(matchesIC)).perform(click())
+//        onView(withText("NEXT MATCH")).perform(click())
+//
+//        onView(withId(nextMatchRV)).check(matches(isDisplayed()))
+//
+//        Thread.sleep(3000)
+//        onView(withId(nextMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(7))
+//        onView(withId(nextMatchRV)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(7, MyViewAction.clickChildViewWithId(
+//            bellIB)), closeSoftKeyboard())
+//    }
 }

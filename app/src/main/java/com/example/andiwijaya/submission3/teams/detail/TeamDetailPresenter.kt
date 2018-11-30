@@ -8,17 +8,20 @@ import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class TeamDetailPresenter(private val view: TeamDetailView,
-                          private val apiRepository: ApiRepository,
-                          private val gson: Gson,
-                          private val contextPool: CoroutineContextProvider = CoroutineContextProvider()) {
+class TeamDetailPresenter(
+    private val view: TeamDetailView,
+    private val apiRepository: ApiRepository,
+    private val gson: Gson,
+    private val contextPool: CoroutineContextProvider = CoroutineContextProvider()
+) {
 
     fun getTeamDetail(teamId: String) {
         view.showLoading()
 
-        GlobalScope.launch(contextPool.main){
-            val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getTeamByIdDetail(teamId)).await(),
+        GlobalScope.launch(contextPool.main) {
+            val data = gson.fromJson(
+                apiRepository
+                    .doRequest(TheSportDBApi.getTeamByIdDetail(teamId)).await(),
                 TeamResponse::class.java
             )
 

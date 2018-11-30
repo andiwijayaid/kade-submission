@@ -35,8 +35,10 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private var isFavorite: Boolean = false
     private var teamName: String? = null
     private lateinit var teamId: String
-
     private lateinit var team: Team
+
+    // save state if data is downloaded from API or not
+    private var isDataDownloaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,9 +103,10 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     override fun getDataFromAPI() {
         if (checkInternetConnection(this)) {
             presenter.getTeamDetail(teamId)
+            isDataDownloaded = true
         } else {
-
             toast(R.string.check_connection)
+            isDataDownloaded = false
         }
     }
 
@@ -132,7 +135,12 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add_to_favorite -> {
-                checkFavoriteStat()
+                // prevent user to add match to favorite when no connection/data is not downloaded
+                if (isDataDownloaded) {
+                    checkFavoriteStat()
+                } else {
+                    toast(R.string.check_connection)
+                }
                 true
             }
 

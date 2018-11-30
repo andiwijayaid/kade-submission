@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.provider.CalendarContract
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.matches.MainAdapter
@@ -14,8 +13,8 @@ import com.example.andiwijaya.submission3.matches.MatchesView
 import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.checkInternetConnection
-import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.convertToMillis
+import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_search_match.*

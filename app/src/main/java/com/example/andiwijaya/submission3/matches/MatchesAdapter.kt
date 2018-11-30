@@ -12,12 +12,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.model.Match
-import com.example.andiwijaya.submission3.util.formatDate
-import com.example.andiwijaya.submission3.util.formatTimeToGMT
-import com.example.andiwijaya.submission3.util.gone
+import com.example.andiwijaya.submission3.util.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import android.util.Log
-import com.example.andiwijaya.submission3.util.convertToMillis
 
 
 class MainAdapter(
@@ -80,14 +76,16 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         homeNameTV.text = matches.homeTeam
         awayNameTV.text = matches.awayTeam
 
+        val dateTime = formatDateTimeToGMT(matches.dateEvent!!, matches.time!!)
+
         if (matches.dateEvent != null) {
-            tanggalTV.text = formatDate(matches.dateEvent!!)
+            tanggalTV.text = getDateOnly(dateTime)
         } else {
             tanggalTV.text = null
         }
 
         if (matches.time != null) {
-            timeTV.text = formatTimeToGMT(matches.time.toString())
+            timeTV.text = getTimeOnly(dateTime)
         } else {
             timeTV.text = null
         }

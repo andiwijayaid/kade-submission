@@ -8,5 +8,4 @@ interface MatchesView {
     fun hideLoading()
     fun getDataFromAPI()
     fun showListMatch(data: List<Match>)
-
 }

@@ -31,7 +31,7 @@ class TeamsAdapter(private var teams: List<Team>, private val listener: (Team) -
     override fun getItemCount(): Int = teams.size
 }
 
-class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val teamBadge: ImageView = view.find(R.id.team_badge)
     private val teamName: TextView = view.find(R.id.team_name)

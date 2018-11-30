@@ -44,10 +44,13 @@ class MatchDetailPresenterTest {
         val fileName = "English Premier League 2018-11-10 Chelsea vs Everton"
 
         GlobalScope.launch {
-            `when`(gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getMatchDetail(fileName)).await(),
-                MatchResponse::class.java
-            )).thenReturn(response)
+            `when`(
+                gson.fromJson(
+                    apiRepository
+                        .doRequest(TheSportDBApi.getMatchDetail(fileName)).await(),
+                    MatchResponse::class.java
+                )
+            ).thenReturn(response)
 
             matchDetailPresenter.getMatchDetail(fileName)
 

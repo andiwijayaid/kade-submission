@@ -41,6 +41,10 @@
     <string name="player">Player</string>
     <string name="added_to_favorite">Added to favorite</string>
     <string name="deleted_from_favorite">Deleted from favorite</string>
+    <string name="app_icon">app icon</string>
+    <string name="team_background">team background</string>
+    <string name="team_badge">team badge</string>
+    <string name="player_picture">player picture</string>
 
     <array name="league">
         <item>English Premier League</item>

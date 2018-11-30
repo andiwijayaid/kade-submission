@@ -29,6 +29,72 @@ import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.toast
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
+
+    private lateinit var presenter: MatchDetailPresenter
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
+    private lateinit var fileName: String
+    private lateinit var homeId: String
+    private lateinit var awayId: String
+    private lateinit var id: String
+    private lateinit var match: Match
+
+    // save state if data is downloaded from API or not
+    private var isDataDownloaded: Boolean = false
+
+    override fun getAwayBadgeFromAPI() {
+        if (checkInternetConnection(this)) {
+            presenter.getAwayBadge(awayId)
+        } else {
+            detailLL.invisible()
+            progressBar.gone()
+            swipeRefreshLayout.isRefreshing = false
+            detailRL.snackbar(
+                R.string.check_connection,
+                R.string.refresh,
+                {
+                    getAwayBadgeFromAPI()
+                }
+            ).setDuration(10000).show()
+        }
+    }
+
+    override fun getHomeBadgeFromAPI() {
+        if (checkInternetConnection(this)) {
+            presenter.getHomeBadge(homeId)
+        } else {
+            detailLL.invisible()
+            progressBar.gone()
+            swipeRefreshLayout.isRefreshing = false
+            detailRL.snackbar(
+                R.string.check_connection,
+                R.string.refresh,
+                {
+                    getHomeBadgeFromAPI()
+                }
+            ).setDuration(10000).show()
+        }
+    }
+
+    override fun getMatchDetailFromAPI() {
+        if (checkInternetConnection(this)) {
+            presenter.getMatchDetail(fileName)
+            isDataDownloaded = true
+        } else {
+            detailLL.invisible()
+            progressBar.gone()
+            swipeRefreshLayout.isRefreshing = false
+            detailRL.snackbar(
+                R.string.check_connection,
+                R.string.refresh,
+                {
+                    getMatchDetailFromAPI()
+                }
+            ).setDuration(10000).show()
+            isDataDownloaded = false
+        }
+    }
+
     override fun showHomeBadge(data: List<Team>) {
         Picasso.get().load(data[0].teamBadge).into(homeBadgeIV)
 
@@ -37,14 +103,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showAwayBadge(data: List<Team>) {
         Picasso.get().load(data[0].teamBadge).into(awayBadgeIV)
     }
-
-    private lateinit var presenter: MatchDetailPresenter
-    private var menuItem: Menu? = null
-    private var isFavorite: Boolean = false
-    private lateinit var fileName: String
-    private lateinit var id: String
-
-    private lateinit var match: Match
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,11 +120,11 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = MatchDetailPresenter(this, request, gson)
-        presenter.getMatchDetail(fileName)
+        getMatchDetailFromAPI()
 
         swipeRefreshLayout.onRefresh {
             noDataTV.invisible()
-            presenter.getMatchDetail(fileName)
+            getMatchDetailFromAPI()
         }
     }
 
@@ -96,6 +154,11 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun showMatchDetail(data: List<Match>) {
 
+        homeId = data[0].homeTeamId!!
+        getHomeBadgeFromAPI()
+        awayId = data[0].awayTeamId!!
+        getAwayBadgeFromAPI()
+
         match = Match(
             matchId = data[0].matchId,
             fileName = data[0].fileName,
@@ -108,14 +171,12 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         swipeRefreshLayout.isRefreshing = false
 
-        presenter.getHomeBadge(data[0].homeTeamId!!)
-        presenter.getAwayBadge(data[0].awayTeamId!!)
-
         homeNameTV.text = data[0].homeTeam
         awayNameTV.text = data[0].awayTeam
 
-        dateTV.text = formatDate(data[0].dateEvent!!)
-        timeTV.text = formatTimeToGMT(data[0].time!!)
+        val dateTime = formatDateTimeToGMT(data[0].dateEvent!!, data[0].time!!)
+        dateTV.text = getDateOnly(dateTime)
+        timeTV.text = getTimeOnly(dateTime)
 
         homeScoreTV.text = data[0].homeScore
         awayScoreTV.text = data[0].awayScore
@@ -172,7 +233,12 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                 true
             }
             R.id.add_to_favorite -> {
-                checkFavoriteStat()
+                // prevent user to add match to favorite when no connection/data is not downloaded
+                if (isDataDownloaded) {
+                    checkFavoriteStat()
+                } else {
+                    toast(R.string.check_connection)
+                }
                 true
             }
 

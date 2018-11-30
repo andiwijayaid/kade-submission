@@ -14,7 +14,6 @@ import com.example.andiwijaya.submission3.util.checkInternetConnection
 import com.example.andiwijaya.submission3.util.gone
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_team_overview.*
 import kotlinx.android.synthetic.main.fragment_team_players.view.*
 import org.jetbrains.anko.startActivity
 

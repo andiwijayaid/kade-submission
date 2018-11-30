@@ -11,7 +11,10 @@ import com.example.andiwijaya.submission3.model.FavoriteTeam
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
-class FavoriteTeamsAdapter(private val favoriteTeams: List<FavoriteTeam>, private val listener: (FavoriteTeam) -> Unit) :
+class FavoriteTeamsAdapter(
+    private val favoriteTeams: List<FavoriteTeam>,
+    private val listener: (FavoriteTeam) -> Unit
+) :
     RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {

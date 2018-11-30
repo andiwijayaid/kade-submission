@@ -17,7 +17,7 @@ import org.jetbrains.anko.support.v4.startActivity
 class MatchesFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager
-     lateinit var tabs: TabLayout
+    lateinit var tabs: TabLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -44,7 +44,7 @@ class MatchesFragment : Fragment() {
         val item = menu?.findItem(R.id.search)
         val searchView = item?.actionView as SearchView?
 
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 startActivity<SearchMatchActivity>("SEARCH_QUERY" to p0)
                 return false

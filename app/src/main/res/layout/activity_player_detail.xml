@@ -47,13 +47,26 @@
                         android:layout_height="wrap_content"/>
 
                 <ImageView
+                        android:id="@+id/teamBadgeIV"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="60dp"
+                        android:scaleType="fitCenter"
+                        android:alpha="0.2"
+                        android:layout_marginEnd="-120dp"
+                        android:layout_above="@id/informationLL"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/team_badge"/>
+
+                <ImageView
                         android:id="@+id/playerIV"
                         android:scaleType="centerCrop"
                         android:layout_below="@id/playerPositionTV"
                         android:layout_above="@id/informationLL"
                         android:layout_marginTop="12dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/player_picture"/>
 
                 <TextView
                         android:id="@+id/noPictTV"
@@ -95,17 +108,21 @@
                             <TextView
                                     android:id="@+id/playerWeightTV"
                                     android:text="@string/no"
+                                    android:textStyle="bold"
                                     android:textSize="24sp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
 
                         </LinearLayout>
 
-                        <ImageView
-                                android:id="@+id/teamBadgeIV"
-                                android:layout_weight="1"
+                        <com.airbnb.lottie.LottieAnimationView
                                 android:layout_width="0dp"
-                                android:layout_height="match_parent"/>
+                                android:layout_weight="0.3"
+                                android:layout_height="match_parent"
+                                android:rotation="-90"
+                                app:lottie_loop="true"
+                                app:lottie_autoPlay="true"
+                                app:lottie_fileName="swipe_indicator.json"/>
 
                         <LinearLayout
                                 android:orientation="vertical"
@@ -122,6 +139,7 @@
                             <TextView
                                     android:id="@+id/playerHeightTV"
                                     android:text="@string/no"
+                                    android:textStyle="bold"
                                     android:textSize="24sp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
@@ -133,7 +151,6 @@
                     <TextView
                             android:id="@+id/profileTV"
                             android:drawablePadding="-6dp"
-                            android:drawableTop="@drawable/ic_arrow_up_black_24dp"
                             android:text="@string/profile"
                             android:textColor="@color/colorAccent"
                             android:textAlignment="center"

@@ -29,7 +29,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:alpha="0.2"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/team_background"/>
 
             <RelativeLayout
                     android:orientation="vertical"
@@ -41,7 +42,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="24dp"
                         android:layout_width="100dp"
-                        android:layout_height="100dp"/>
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/team_badge"/>
 
                 <TextView
                         android:id="@+id/team_name"
