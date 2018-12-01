@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.favorites.favoritematches.FavoriteMatchesFragment
+import com.example.andiwijaya.submission3.favorites.favoriteteams.FavoriteTeamsFragment
 
 class FavoritesFragment : Fragment() {
 
@@ -20,14 +23,10 @@ class FavoritesFragment : Fragment() {
 
         val matchesFragmentAdapter = FavoritesViewPagerAdapter(childFragmentManager)
         matchesFragmentAdapter.addFragment(FavoriteMatchesFragment(), "Match")
-        matchesFragmentAdapter.addFragment(FavoriteMatchesFragment(), "Team")
+        matchesFragmentAdapter.addFragment(FavoriteTeamsFragment(), "Team")
         viewPager.adapter = matchesFragmentAdapter
         tabs.setupWithViewPager(viewPager)
 
         return view
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-
     }
 }

@@ -19,5 +19,8 @@ data class Team(
     var teamStadium: String? = null,
 
     @SerializedName("strDescriptionEN")
-    var teamDescription: String? = null
+    var teamDescription: String? = null,
+
+    @SerializedName("strTeamFanart1")
+    var teamDetailBackground: String? = null
 )

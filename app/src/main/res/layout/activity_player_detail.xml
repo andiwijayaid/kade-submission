@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.andiwijaya.submission3.teams.detail.players.detail.PlayerDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/collapsingToolbarLayout"
+                android:fitsSystemWindows="true"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:id="@+id/playerNameTV"
+                        android:layout_marginTop="?attr/actionBarSize"
+                        android:layout_marginStart="8dp"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/playerPositionTV"
+                        android:layout_below="@id/playerNameTV"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="-6dp"
+                        android:textSize="18sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <ImageView
+                        android:id="@+id/teamBadgeIV"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="60dp"
+                        android:scaleType="fitCenter"
+                        android:alpha="0.2"
+                        android:layout_marginEnd="-120dp"
+                        android:layout_above="@id/informationLL"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/team_badge"/>
+
+                <ImageView
+                        android:id="@+id/playerIV"
+                        android:scaleType="centerCrop"
+                        android:layout_below="@id/playerPositionTV"
+                        android:layout_above="@id/informationLL"
+                        android:layout_marginTop="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/player_picture"/>
+
+                <TextView
+                        android:id="@+id/noPictTV"
+                        android:text="@string/no_pic"
+                        android:alpha="0.2"
+                        android:textSize="48sp"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:id="@+id/informationLL"
+                        android:orientation="vertical"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/colorPrimaryDark"
+                        android:padding="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
+                            android:baselineAligned="false">
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_height="wrap_content">
+
+                            <TextView
+                                    android:text="@string/weight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                            <TextView
+                                    android:id="@+id/playerWeightTV"
+                                    android:text="@string/no"
+                                    android:textStyle="bold"
+                                    android:textSize="24sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                        <com.airbnb.lottie.LottieAnimationView
+                                android:layout_width="0dp"
+                                android:layout_weight="0.3"
+                                android:layout_height="match_parent"
+                                android:rotation="-90"
+                                app:lottie_loop="true"
+                                app:lottie_autoPlay="true"
+                                app:lottie_fileName="swipe_indicator.json"/>
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_height="wrap_content">
+
+                            <TextView
+                                    android:text="@string/height"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                            <TextView
+                                    android:id="@+id/playerHeightTV"
+                                    android:text="@string/no"
+                                    android:textStyle="bold"
+                                    android:textSize="24sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                            android:id="@+id/profileTV"
+                            android:drawablePadding="-6dp"
+                            android:text="@string/profile"
+                            android:textColor="@color/colorAccent"
+                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:title="@string/player"
+                    app:navigationIcon="?attr/homeAsUpIndicator"
+                    app:layout_collapseMode="pin"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:textSize="18sp"
+                    android:text="@string/biography"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/playerDescTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

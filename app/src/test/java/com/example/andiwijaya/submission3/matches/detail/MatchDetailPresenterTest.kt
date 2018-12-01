@@ -7,9 +7,8 @@ import com.example.andiwijaya.submission3.model.MatchResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.junit.Test
-
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -45,10 +44,13 @@ class MatchDetailPresenterTest {
         val fileName = "English Premier League 2018-11-10 Chelsea vs Everton"
 
         GlobalScope.launch {
-            `when`(gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getMatchDetail(fileName)).await(),
-                MatchResponse::class.java
-            )).thenReturn(response)
+            `when`(
+                gson.fromJson(
+                    apiRepository
+                        .doRequest(TheSportDBApi.getMatchDetail(fileName)).await(),
+                    MatchResponse::class.java
+                )
+            ).thenReturn(response)
 
             matchDetailPresenter.getMatchDetail(fileName)
 

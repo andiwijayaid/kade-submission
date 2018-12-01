@@ -6,12 +6,10 @@ import com.example.andiwijaya.submission3.api.TheSportDBApi
 import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.model.MatchResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.junit.Test
-
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -43,10 +41,13 @@ class MatchesPresenterTest {
         val id = "4328"
 
         GlobalScope.launch {
-            `when`(gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getLastMatch(id)).await(),
-                MatchResponse::class.java
-                )).thenReturn(response)
+            `when`(
+                gson.fromJson(
+                    apiRepository
+                        .doRequest(TheSportDBApi.getLastMatchByLeagueId(id)).await(),
+                    MatchResponse::class.java
+                )
+            ).thenReturn(response)
 
             matchesPresenter.getPastMatchList(id)
 

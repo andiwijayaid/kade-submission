@@ -30,7 +30,8 @@
             android:text="@string/match_has_not_started_yet"
             android:textColor="@color/grey"
             android:textStyle="bold"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/progressBar"
             android:visibility="gone"
             android:textSize="24sp"/>
 
@@ -43,7 +44,6 @@
 
         <TextView
                 android:id="@+id/dateTV"
-                android:text="@string/dates"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -52,7 +52,6 @@
 
         <TextView
                 android:id="@+id/timeTV"
-                android:text="@string/dates"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -63,6 +62,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
                 android:baselineAligned="false">
 
@@ -84,6 +85,7 @@
                         android:id="@+id/homeNameTV"
                         android:textColor="@color/colorPrimary"
                         android:layout_width="wrap_content"
+                        android:textAlignment="center"
                         android:layout_height="wrap_content"/>
 
             </LinearLayout>
@@ -142,6 +144,7 @@
                         android:id="@+id/awayNameTV"
                         android:textColor="@color/colorPrimary"
                         android:layout_width="wrap_content"
+                        android:textAlignment="center"
                         android:layout_height="wrap_content"/>
 
             </LinearLayout>

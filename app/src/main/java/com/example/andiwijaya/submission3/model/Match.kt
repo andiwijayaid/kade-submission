@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Match(
 
-    @SerializedName("strDate")
-    var date: String? = null,
+    @SerializedName("dateEvent")
+    var dateEvent: String? = null,
 
     @SerializedName("strTime")
     var time: String? = null,
@@ -79,6 +79,9 @@ data class Match(
     var fileName: String? = null,
 
     @SerializedName("idEvent")
-    var matchId: String? = null
+    var matchId: String? = null,
+
+    @SerializedName("strEvent")
+    var eventName: String? = null
 
 ) : Parcelable

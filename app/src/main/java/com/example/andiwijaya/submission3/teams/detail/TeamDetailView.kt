@@ -5,5 +5,6 @@ import com.example.andiwijaya.submission3.model.Team
 interface TeamDetailView {
     fun showLoading()
     fun hideLoading()
+    fun getDataFromAPI()
     fun showTeamDetail(data: List<Team>)
 }

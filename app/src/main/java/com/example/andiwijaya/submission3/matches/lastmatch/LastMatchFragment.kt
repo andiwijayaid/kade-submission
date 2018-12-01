@@ -1,6 +1,8 @@
 package com.example.andiwijaya.submission3.matches.lastmatch
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -9,27 +11,31 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.andiwijaya.submission3.R
+import com.example.andiwijaya.submission3.R.color.colorAccent
+import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.matches.MainAdapter
 import com.example.andiwijaya.submission3.matches.MatchesPresenter
 import com.example.andiwijaya.submission3.matches.MatchesView
-import com.example.andiwijaya.submission3.model.Match
-import kotlinx.android.synthetic.main.fragment_last_match.*
-import com.example.andiwijaya.submission3.R.color.colorAccent
-import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity
+import com.example.andiwijaya.submission3.model.Match
+import com.example.andiwijaya.submission3.util.checkInternetConnection
+import com.example.andiwijaya.submission3.util.convertToMillis
 import com.example.andiwijaya.submission3.util.gone
-import com.example.andiwijaya.submission3.util.invisible
 import com.example.andiwijaya.submission3.util.visible
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_last_match.*
 import kotlinx.android.synthetic.main.fragment_last_match.view.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.onRefresh
 
 class LastMatchFragment : Fragment(), MatchesView {
 
     private lateinit var leagueName: String
-    private var matches: MutableList<Match> = mutableListOf()
-    private lateinit var adapter: MainAdapter
+    private lateinit var leagueId: String
+    var matches: MutableList<Match> = mutableListOf()
+    private lateinit var presenter: MatchesPresenter
+    lateinit var adapter: MainAdapter
 
     override fun showLoading() {
         view?.progressBar?.visible()
@@ -37,6 +43,22 @@ class LastMatchFragment : Fragment(), MatchesView {
 
     override fun hideLoading() {
         view?.progressBar?.gone()
+    }
+
+    override fun getDataFromAPI() {
+        if (checkInternetConnection(activity)) {
+            presenter.getPastMatchList(leagueId)
+        } else {
+            progressBar?.gone()
+            swipeRefreshLayout?.isRefreshing = false
+            last_match_fragment?.snackbar(
+                R.string.check_connection,
+                R.string.refresh,
+                {
+                    getDataFromAPI()
+                }
+            )?.setDuration(10000)?.show()
+        }
     }
 
     override fun showListMatch(data: List<Match>) {
@@ -56,19 +78,38 @@ class LastMatchFragment : Fragment(), MatchesView {
             android.R.color.holo_red_light
         )
 
-        adapter = MainAdapter(matches) {
-            activity?.applicationContext?.startActivity<MatchDetailActivity>(
-                "FILE_NAME" to "${it.fileName}",
-                "ID" to "${it.matchId}"
-            )
-        }
+        adapter = MainAdapter(
+            matches,
+            context,
+            {
+                activity?.applicationContext?.startActivity<MatchDetailActivity>(
+                    "FILE_NAME" to "${it.fileName}",
+                    "ID" to "${it.matchId}"
+                )
+            },
+            {
+                val intent = Intent(Intent.ACTION_EDIT)
+                intent.type = "vnd.android.cursor.item/event"
+                intent.putExtra(CalendarContract.Events.TITLE, it.eventName)
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, it.fileName)
+                intent.putExtra(CalendarContract.Events.HAS_ALARM, 1)
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, convertToMillis(it.dateEvent!!, it.time!!))
+                intent.putExtra(
+                    CalendarContract.EXTRA_EVENT_END_TIME,
+                    convertToMillis(it.dateEvent!!, it.time!!) + 60 * 90 * 1000
+                )
+                intent.putExtra(CalendarContract.Events.ALL_DAY, false)
+                activity?.applicationContext?.startActivity(intent)
+            })
+
         view.lastMatchRV.adapter = adapter
         view.lastMatchRV.layoutManager = LinearLayoutManager(context)
         val request = ApiRepository()
         val gson = Gson()
 
-        val presenter = MatchesPresenter(this@LastMatchFragment, request, gson)
-        presenter.getPastMatchList("4328")
+        presenter = MatchesPresenter(this@LastMatchFragment, request, gson)
+        leagueId = "4328"
+        getDataFromAPI()
 
         val spinnerItems = resources.getStringArray(R.array.league)
         val spinnerAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
@@ -78,14 +119,15 @@ class LastMatchFragment : Fragment(), MatchesView {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 leagueName = leagueSpinner.selectedItem.toString()
-                when(leagueName){
-                    "English Premier League" -> presenter.getPastMatchList("4328")
-                    "English League Championship" -> presenter.getPastMatchList("4329")
-                    "German Bundesliga" -> presenter.getPastMatchList("4331")
-                    "Italian Serie A" -> presenter.getPastMatchList("4332")
-                    "French Ligue 1" -> presenter.getPastMatchList("4334")
-                    "Spanish La Liga" -> presenter.getPastMatchList("4335")
+                when (leagueName) {
+                    "English Premier League" -> leagueId = "4328"
+                    "English League Championship" -> leagueId = "4329"
+                    "German Bundesliga" -> leagueId = "4331"
+                    "Italian Serie A" -> leagueId = "4332"
+                    "French Ligue 1" -> leagueId = "4334"
+                    "Spanish La Liga" -> leagueId = "4335"
                 }
+                getDataFromAPI()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -93,7 +135,7 @@ class LastMatchFragment : Fragment(), MatchesView {
         }
 
         view.swipeRefreshLayout?.onRefresh {
-            presenter.getPastMatchList("4328")
+            getDataFromAPI()
         }
 
         return view

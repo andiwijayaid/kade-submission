@@ -4,16 +4,16 @@
     <item
             android:id="@+id/matchesIC"
             android:icon="@drawable/ic_last_match"
-            android:title="Matches" />
+            android:title="Matches"/>
 
     <item
             android:id="@+id/teamsIC"
             android:icon="@drawable/ic_teams"
-            android:title="Teams" />
+            android:title="Teams"/>
 
     <item
-        android:id="@+id/favoriteIC"
-        android:icon="@drawable/ic_favorite"
-        android:title="Favorites"/>
+            android:id="@+id/favoriteIC"
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorites"/>
 
 </menu>

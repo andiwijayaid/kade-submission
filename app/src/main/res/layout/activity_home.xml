@@ -12,27 +12,19 @@
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_layout"
+            android:layout_above="@+id/bottomNavigation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </FrameLayout>
 
-    <LinearLayout
-            android:id="@+id/bottom_layout"
+    <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:menu="@menu/navigation_menu"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
-        <android.support.design.widget.BottomNavigationView
-                android:id="@+id/bottomNavigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/navigation_menu"
-                app:theme="@style/BottomNavigationTheme"
-                android:layout_gravity="bottom"
-                android:background="@color/colorPrimary"/>
-
-    </LinearLayout>
+            app:theme="@style/BottomNavigationTheme"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"/>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.andiwijaya.submission3">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -11,23 +12,25 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".matches.MatchesActivity">
-        </activity>
-        <activity android:name="com.example.andiwijaya.submission3.matches.detail.MatchDetailActivity">
-        </activity>
+        <activity android:name=".matches.detail.MatchDetailActivity"/>
         <activity
                 android:name=".splash.SplashScreenActivity"
-                android:theme="@style/AppTheme.Fullscreen">
+                android:theme="@style/AppTheme.Fullscreen"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".home.HomeActivity">
-        </activity>
-        <activity android:name=".SearchMatchActivity">
-        </activity>
+        <activity android:name=".home.HomeActivity"/>
+        <activity android:name=".searchview.SearchMatchActivity"/>
+        <activity
+                android:name=".teams.detail.TeamDetailActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".teams.detail.players.detail.PlayerDetailActivity"
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

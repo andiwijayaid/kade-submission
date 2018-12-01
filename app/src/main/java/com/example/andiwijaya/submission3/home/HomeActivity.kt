@@ -1,7 +1,7 @@
 package com.example.andiwijaya.submission3.home
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.R.id.*
 import com.example.andiwijaya.submission3.favorites.FavoritesFragment
@@ -41,7 +41,8 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    MatchesFragment(), MatchesFragment::class.java.simpleName)
+                    MatchesFragment(), MatchesFragment::class.java.simpleName
+                )
                 .commit()
         }
     }
@@ -52,7 +53,8 @@ class HomeActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    TeamsFragment(), TeamsFragment::class.java.simpleName)
+                    TeamsFragment(), TeamsFragment::class.java.simpleName
+                )
                 .commit()
         }
     }

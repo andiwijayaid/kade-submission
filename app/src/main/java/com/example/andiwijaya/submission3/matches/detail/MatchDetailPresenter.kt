@@ -1,6 +1,5 @@
 package com.example.andiwijaya.submission3.matches.detail
 
-import android.util.Log
 import com.example.andiwijaya.submission3.api.ApiRepository
 import com.example.andiwijaya.submission3.api.TheSportDBApi
 import com.example.andiwijaya.submission3.model.MatchDetailResponse
@@ -37,11 +36,9 @@ class MatchDetailPresenter(
         GlobalScope.async(Dispatchers.Main) {
             val data = gson.fromJson(
                 apiRepository
-                    .doRequest(TheSportDBApi.getTeamDetail(teamId)).await(),
+                    .doRequest(TheSportDBApi.getTeamByIdDetail(teamId)).await(),
                 TeamResponse::class.java
             )
-
-            Log.d("H", data.toString())
 
             view.showHomeBadge(data.teams)
             view.hideLoading()
@@ -54,11 +51,9 @@ class MatchDetailPresenter(
         GlobalScope.async(Dispatchers.Main) {
             val data = gson.fromJson(
                 apiRepository
-                    .doRequest(TheSportDBApi.getTeamDetail(teamId)).await(),
+                    .doRequest(TheSportDBApi.getTeamByIdDetail(teamId)).await(),
                 TeamResponse::class.java
             )
-
-            Log.d("A", data.toString())
 
             view.showAwayBadge(data.teams)
             view.hideLoading()

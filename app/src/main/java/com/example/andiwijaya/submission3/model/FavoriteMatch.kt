@@ -12,7 +12,7 @@ data class FavoriteMatch(
 ) {
 
     companion object {
-        const val TABLE_FAVORITE: String = "TABLE_FAVORITE"
+        const val TABLE_MATCH_FAVORITE: String = "TABLE_MATCH_FAVORITE"
         const val ID: String = "ID_"
         const val MATCH_ID: String = "MATCH_ID"
         const val MATCH_FILE_NAME: String = "MATCH_FILE_NAME"

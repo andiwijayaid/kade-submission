@@ -18,13 +18,31 @@ class TeamsPresenter(
     fun getTeamList(league: String) {
         view.showLoading()
 
-        GlobalScope.launch(context.main){
-            val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getTeamList(league)).await(),
+        GlobalScope.launch(context.main) {
+            val data = gson.fromJson(
+                apiRepository
+                    .doRequest(TheSportDBApi.getTeamByLeagueId(league)).await(),
                 TeamResponse::class.java
             )
 
             view.showListTeam(data.teams)
+            view.hideLoading()
+        }
+    }
+
+    fun getTeamByNameList(name: String) {
+        view.showLoading()
+
+        GlobalScope.launch(context.main) {
+            val data = gson.fromJson(
+                apiRepository
+                    .doRequest(TheSportDBApi.getTeamByName(name)).await(),
+                TeamResponse::class.java
+            )
+
+            if (!data.teams.isNullOrEmpty()) {
+                view.showListTeam(data.teams)
+            }
             view.hideLoading()
         }
     }
