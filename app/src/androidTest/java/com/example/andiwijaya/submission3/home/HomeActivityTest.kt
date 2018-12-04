@@ -64,9 +64,6 @@ class HomeActivityTest {
         onView(withText("Deleted from favorite")).check(matches(isDisplayed()))
         pressBack() // finish() detail activity
 
-        // Refresh item with swipe refresh layout
-        onView(withId(favoriteIC)).perform(click())
-
         /** Counting item in favorite match recyclerview
          *  make sure it has been removed
          */
@@ -116,10 +113,6 @@ class HomeActivityTest {
         // checking snackbar
         onView(withText("Deleted from favorite")).check(matches(isDisplayed()))
         pressBack() // finish() detail activity
-
-        // Refresh item with swipe refresh layout
-        onView(withId(favoriteIC)).perform(click())
-        onView(withText("TEAM")).perform(click())
 
         /** Counting item in favorite team recyclerview
          *  make sure it has been removed
@@ -186,17 +179,4 @@ class HomeActivityTest {
         onView(withText("Italian Serie A")).perform(click())
         Thread.sleep(3000)
     }
-
-//    @Test
-//    fun calendarIntentTest() {
-//        onView(withId(matchesIC)).perform(click())
-//        onView(withText("NEXT MATCH")).perform(click())
-//
-//        onView(withId(nextMatchRV)).check(matches(isDisplayed()))
-//
-//        Thread.sleep(3000)
-//        onView(withId(nextMatchRV)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(7))
-//        onView(withId(nextMatchRV)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(7, MyViewAction.clickChildViewWithId(
-//            bellIB)), closeSoftKeyboard())
-//    }
 }

@@ -1,11 +1,11 @@
 package com.example.andiwijaya.submission3.splash
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.example.andiwijaya.submission3.R
 import com.example.andiwijaya.submission3.home.HomeActivity
+import org.jetbrains.anko.startActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -16,7 +16,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val handler = Handler()
         handler.postDelayed({
             kotlin.run {
-                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                startActivity<HomeActivity>()
                 finish()
             }
         }, 2000L)

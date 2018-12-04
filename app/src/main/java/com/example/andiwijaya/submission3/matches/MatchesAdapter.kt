@@ -15,7 +15,6 @@ import com.example.andiwijaya.submission3.model.Match
 import com.example.andiwijaya.submission3.util.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-
 class MainAdapter(
     private var matches: MutableList<Match>,
     private val context: Context?,

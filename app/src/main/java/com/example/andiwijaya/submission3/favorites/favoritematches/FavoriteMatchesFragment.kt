@@ -37,20 +37,24 @@ class FavoriteMatchesFragment : Fragment() {
         view.favoriteMatchRV.layoutManager = LinearLayoutManager(context)
         view.favoriteMatchRV.adapter = adapter
         showFavorite()
-
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showFavorite()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         swipeRefresh.onRefresh {
-            favoriteMatches.clear()
             showFavorite()
         }
     }
 
     private fun showFavorite() {
+        favoriteMatches.clear()
         context?.database?.use {
             swipeRefresh.isRefreshing = false
             val result = select(FavoriteMatch.TABLE_MATCH_FAVORITE)

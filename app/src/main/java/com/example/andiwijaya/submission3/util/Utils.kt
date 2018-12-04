@@ -59,7 +59,7 @@ fun convertToMillis(date: String, time: String): Long {
     val df = SimpleDateFormat("MMM").parse(dateList[2])
     val calendar = Calendar.getInstance()
     calendar.time = df
-    val monthToInt = calendar.get(Calendar.MONTH)
+    val monthToInt = calendar[Calendar.MONTH]
 
     mDate.set(
         dateList[3].toInt(),

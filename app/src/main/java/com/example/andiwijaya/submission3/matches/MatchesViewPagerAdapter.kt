@@ -10,7 +10,7 @@ open class MatchesViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(
     private val fragmentTitleList = mutableListOf<String>()
 
     override fun getItem(p0: Int): Fragment {
-        return fragmentList.get(p0)
+        return fragmentList[p0]
     }
 
     override fun getCount(): Int {
@@ -18,7 +18,7 @@ open class MatchesViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return fragmentTitleList.get(position)
+        return fragmentTitleList[position]
     }
 
     fun addFragment(fragment: Fragment, title: String) {

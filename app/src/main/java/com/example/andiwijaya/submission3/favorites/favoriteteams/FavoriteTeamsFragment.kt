@@ -40,16 +40,21 @@ class FavoriteTeamsFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        showFavorite()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         swipeRefresh.onRefresh {
-            favoriteTeams.clear()
             showFavorite()
         }
     }
 
     private fun showFavorite() {
+        favoriteTeams.clear()
         context?.database?.use {
             swipeRefresh.isRefreshing = false
             val result = select(FavoriteTeam.TABLE_TEAM_FAVORITE)
