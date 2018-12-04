@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
-open class FavoritesViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+class FavoritesViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     private val fragmentList = mutableListOf<Fragment>()
     private val fragmentTitleList = mutableListOf<String>()

@@ -16,7 +16,7 @@ class UtilsKtTest {
     @Test
     fun formatDateTimeToGMT() {
         assertEquals(
-            "Sun Dec 02 01:30:00 SGT 2018",
+            "Sun Dec 02 01:30:00 CST 2018",
             com.example.andiwijaya.submission3.util.formatDateTimeToGMT("2018-12-01", "17:30:00+00:00")
         )
     }
