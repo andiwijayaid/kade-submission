@@ -26,7 +26,7 @@ fun View.gone() {
 fun formatDateTimeToGMT(date: String?, time: String?): String {
     val dateTime = "$date $time"
 
-    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH)
     simpleDateFormat.timeZone = TimeZone.getTimeZone("GMT 7")
     return simpleDateFormat.parse(dateTime).toString()
 }
@@ -56,7 +56,7 @@ fun convertToMillis(date: String, time: String): Long {
 
     val mDate = Calendar.getInstance()
 
-    val df = SimpleDateFormat("MMM").parse(dateList[2])
+    val df = SimpleDateFormat("MMM", Locale.ENGLISH).parse(dateList[2])
     val calendar = Calendar.getInstance()
     calendar.time = df
     val monthToInt = calendar[Calendar.MONTH]

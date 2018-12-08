@@ -16,13 +16,14 @@
         <ImageView
                 android:id="@+id/team_badge"
                 android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp"
+                android:contentDescription="@string/team_badge"/>
 
         <TextView
                 android:id="@+id/team_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/black"/>

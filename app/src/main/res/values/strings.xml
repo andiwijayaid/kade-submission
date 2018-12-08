@@ -1,17 +1,13 @@
 <resources>
     <string name="app_name">FOOTBALL APP</string>
     <string name="favorites">Favorites</string>
-    <string name="english_premiere_league">ENGLISH PREMIERE LEAGUE</string>
     <string name="my_favorite">MY FAVORITE</string>
-    <string name="match_fixture">Match Fixture</string>
     <string name="this_is_image">this is image</string>
-    <string name="tanggal">tanggal</string>
     <string name="home">home</string>
     <string name="_0">0</string>
     <string name="vs">vs</string>
     <string name="away">away</string>
     <string name="match_detail">MATCH DETAIL</string>
-    <string name="dates">Dates</string>
     <string name="goals">Goals</string>
     <string name="shots">Shots</string>
     <string name="lineups">Lineups</string>
@@ -21,14 +17,9 @@
     <string name="forward">Forward</string>
     <string name="subtitutions">Subtitutions</string>
     <string name="match_has_not_started_yet">match has not started yet</string>
-    <string name="football_app">Football App</string>
     <string name="bell">Bell</string>
-    <string name="star">star</string>
     <string name="weight">WEIGHT</string>
     <string name="height">HEIGHT</string>
-    <string name="age">AGE</string>
-    <string name="player_position">Player Position</string>
-    <string name="player_name">Player Name</string>
     <string name="profile">Profile</string>
     <string name="no_pic">NO PIC</string>
     <string name="no">-</string>
@@ -55,12 +46,4 @@
         <item>Spanish La Liga</item>
     </array>
 
-    <array name="league_id">
-        <item>4328</item>
-        <item>4329</item>
-        <item>4331</item>
-        <item>4332</item>
-        <item>4334</item>
-        <item>4335</item>
-    </array>
 </resources>
