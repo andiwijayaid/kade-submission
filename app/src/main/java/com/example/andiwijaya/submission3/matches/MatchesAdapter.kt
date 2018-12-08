@@ -88,7 +88,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
 
         // remove bell image button for last match
-        if (matches.homeScore != null) {
+        if (matches.homeScore != null || matches.dateEvent.isNullOrEmpty() || matches.time.isNullOrEmpty()) {
             bellIB.gone()
         }
     }

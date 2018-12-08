@@ -25,7 +25,9 @@ class MatchDetailPresenter(
                 MatchDetailResponse::class.java
             )
 
-            view.showMatchDetail(data.event)
+            if (!data.event.isNullOrEmpty()) {
+                view.showMatchDetail(data.event)
+            }
             view.hideLoading()
         }
     }
@@ -40,7 +42,9 @@ class MatchDetailPresenter(
                 TeamResponse::class.java
             )
 
-            view.showHomeBadge(data.teams)
+            if (!data.teams.isNullOrEmpty()) {
+                view.showHomeBadge(data.teams)
+            }
             view.hideLoading()
         }
     }
@@ -55,7 +59,9 @@ class MatchDetailPresenter(
                 TeamResponse::class.java
             )
 
-            view.showAwayBadge(data.teams)
+            if (!data.teams.isNullOrEmpty()) {
+                view.showAwayBadge(data.teams)
+            }
             view.hideLoading()
         }
     }

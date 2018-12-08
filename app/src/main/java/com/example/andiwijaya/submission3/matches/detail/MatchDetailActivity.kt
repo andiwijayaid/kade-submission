@@ -216,7 +216,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         data[0].awayLineupSubstitutes = replaceSemicolonWithNewRow(data[0].awayLineupSubstitutes!!)
         homeSubsTV.text = data[0].homeLineupSubstitutes
         awaySubsTV.text = data[0].awayLineupSubstitutes
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -235,7 +234,11 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             R.id.add_to_favorite -> {
                 // prevent user to add match to favorite when no connection/data is not downloaded
                 if (isDataDownloaded) {
-                    checkFavoriteStat()
+                    if (homeNameTV.text.isNullOrEmpty()) {
+                        toast(R.string.not_available)
+                    } else {
+                        checkFavoriteStat()
+                    }
                 } else {
                     toast(R.string.check_connection)
                 }

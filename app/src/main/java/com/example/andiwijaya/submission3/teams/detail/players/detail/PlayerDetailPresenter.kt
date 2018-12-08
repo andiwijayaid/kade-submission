@@ -24,7 +24,9 @@ class PlayerDetailPresenter(
                 PlayerDetailResponse::class.java
             )
 
-            view.showPlayerDetail(data.players)
+            if (!data.players.isNullOrEmpty()) {
+                view.showPlayerDetail(data.players)
+            }
             view.showLoading()
         }
     }
@@ -39,8 +41,9 @@ class PlayerDetailPresenter(
                 TeamResponse::class.java
             )
 
-
-            view.showBadge(data.teams)
+            if (!data.teams.isNullOrEmpty()) {
+                view.showBadge(data.teams)
+            }
             view.hideLoading()
         }
     }

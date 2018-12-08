@@ -26,6 +26,7 @@
     <string name="biography">Biography</string>
     <string name="search">Search</string>
     <string name="not_found">Not Found</string>
+    <string name="not_available">Not Available</string>
     <string name="check_connection">Check your connection</string>
     <string name="refresh">Refresh</string>
     <string name="undo">Undo</string>

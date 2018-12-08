@@ -25,7 +25,9 @@ class TeamDetailPresenter(
                 TeamResponse::class.java
             )
 
-            view.showTeamDetail(data.teams)
+            if (!data.teams.isNullOrEmpty()) {
+                view.showTeamDetail(data.teams)
+            }
             view.hideLoading()
         }
     }
