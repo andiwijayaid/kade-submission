@@ -60,13 +60,13 @@ class MainAdapter(
 }
 
 class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val homeNameTV: TextView = view.findViewById(R.id.homeNameTV)
-    val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)
-    val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
-    val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
-    val tanggalTV: TextView = view.findViewById(R.id.dateTV)
-    val timeTV: TextView = view.findViewById(R.id.timeTV)
-    val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
+    private val homeNameTV: TextView = view.findViewById(R.id.homeNameTV)
+    private val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)
+    private val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
+    private val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
+    private val tanggalTV: TextView = view.findViewById(R.id.dateTV)
+    private val timeTV: TextView = view.findViewById(R.id.timeTV)
+    private val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
     val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit, bellListener: (Match) -> Unit) {

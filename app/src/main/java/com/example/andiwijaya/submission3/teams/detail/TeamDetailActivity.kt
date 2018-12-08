@@ -62,8 +62,8 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         mAdapter.addFragment(PlayersFragment(), "players")
 
         app_bar_layout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
-            var isShow = true
-            var scrollRange = -1
+            private var isShow = true
+            private var scrollRange = -1
 
             override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
                 if (scrollRange == -1) {

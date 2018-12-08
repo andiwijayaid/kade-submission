@@ -38,13 +38,13 @@ class FavoriteMatchesAdapter(
 
 class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    val homeNameTV: TextView = view.findViewById(R.id.homeNameTV)
-    val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)
-    val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
-    val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
-    val tanggalTV: TextView = view.findViewById(R.id.dateTV)
-    val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
-    val bellIB: ImageButton = view.findViewById(R.id.bellIB)
+    private val homeNameTV: TextView = view.findViewById(R.id.homeNameTV)
+    private val homeScoreTV: TextView = view.findViewById(R.id.homeScoreTV)
+    private val awayNameTV: TextView = view.findViewById(R.id.awayNameTV)
+    private val awayScoreTV: TextView = view.findViewById(R.id.awayScoreTV)
+    private val tanggalTV: TextView = view.findViewById(R.id.dateTV)
+    private val matchLL: RelativeLayout = view.findViewById(R.id.matchLL)
+    private val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
     fun bindItem(favorites: FavoriteMatch, listener: (FavoriteMatch) -> Unit) {
         homeNameTV.text = favorites.homeName

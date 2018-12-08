@@ -33,9 +33,9 @@ class LastMatchFragment : Fragment(), MatchesView {
 
     private lateinit var leagueName: String
     private lateinit var leagueId: String
-    var matches: MutableList<Match> = mutableListOf()
+    private var matches: MutableList<Match> = mutableListOf()
     private lateinit var presenter: MatchesPresenter
-    lateinit var adapter: MainAdapter
+    private lateinit var adapter: MainAdapter
 
     override fun showLoading() {
         view?.progressBar?.visible()

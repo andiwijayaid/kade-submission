@@ -35,10 +35,10 @@ class PlayerAdapter(private val players: MutableList<Player>, private val listen
 
 class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    val playerCardView = view.findViewById<CardView>(R.id.playerCV)
-    val playerImage = view.findViewById<ImageView>(R.id.playerIV)
-    val playerName = view.findViewById<TextView>(R.id.playerNameTV)
-    val playerPosition = view.findViewById<TextView>(R.id.playerPositionTV)
+    private val playerCardView = view.findViewById<CardView>(R.id.playerCV)
+    private val playerImage = view.findViewById<ImageView>(R.id.playerIV)
+    private val playerName = view.findViewById<TextView>(R.id.playerNameTV)
+    private val playerPosition = view.findViewById<TextView>(R.id.playerPositionTV)
 
     fun bindItem(players: Player, listener: (Player) -> Unit) {
         if (!players.playerImage.isNullOrEmpty()) {

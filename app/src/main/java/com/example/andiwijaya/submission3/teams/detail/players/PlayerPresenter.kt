@@ -23,7 +23,9 @@ class PlayerPresenter(
                 PlayerResponse::class.java
             )
 
-            view.showPlayerDetail(data.player)
+            if (!data.player.isNullOrEmpty()) {
+                view.showPlayerDetail(data.player)
+            }
             view.hideLoading()
         }
 
