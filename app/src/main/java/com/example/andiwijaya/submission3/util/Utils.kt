@@ -23,7 +23,7 @@ fun View.gone() {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun formatDateTimeToGMT(date: String, time: String): String {
+fun formatDateTimeToGMT(date: String?, time: String?): String {
     val dateTime = "$date $time"
 
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")

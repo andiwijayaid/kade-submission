@@ -70,27 +70,22 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val bellIB: ImageButton = view.findViewById(R.id.bellIB)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit, bellListener: (Match) -> Unit) {
-        homeScoreTV.text = matches.homeScore
-        awayScoreTV.text = matches.awayScore
         homeNameTV.text = matches.homeTeam
         awayNameTV.text = matches.awayTeam
 
-        val dateTime = formatDateTimeToGMT(matches.dateEvent!!, matches.time!!)
+        homeScoreTV.text = matches.homeScore
+        awayScoreTV.text = matches.awayScore
 
-        if (matches.dateEvent != null) {
+        if (matches.dateEvent != null && matches.time != null) {
+            val dateTime = formatDateTimeToGMT(matches.dateEvent, matches.time)
+
             tanggalTV.text = getDateOnly(dateTime)
-        } else {
-            tanggalTV.text = null
-        }
 
-        if (matches.time != null) {
             timeTV.text = getTimeOnly(dateTime)
-        } else {
-            timeTV.text = null
-        }
 
-        matchLL.onClick { listener(matches) }
-        bellIB.onClick { bellListener(matches) }
+            matchLL.onClick { listener(matches) }
+            bellIB.onClick { bellListener(matches) }
+        }
 
         // remove bell image button for last match
         if (matches.homeScore != null) {

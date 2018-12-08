@@ -32,7 +32,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
                 android:paddingTop="18dp"
-                android:text="@string/tanggal"
+                android:text="@string/no"
                 android:gravity="center"
                 android:textColor="@color/colorPrimary"
                 tools:ignore="RelativeOverlap"/>
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
-                android:text="@string/tanggal"
+                android:text="@string/no"
                 android:gravity="center"
                 android:layout_below="@id/dateTV"
                 android:layout_marginBottom="6dp"
